@@ -4,51 +4,40 @@
     <meta charset="UTF-8">
     <title>Yusuf'un Asistanı</title>
     <style>
-        body { background: #000; color: #fff; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; }
-        .back-btn { position: absolute; top: 15px; left: 15px; color: #8ab4f8; text-decoration: none; font-size: 16px; }
-        h1 { font-weight: 300; margin-bottom: 30px; }
-        .input-container { background: #1a1a1a; border-radius: 30px; padding: 20px; width: 80%; max-width: 400px; display: flex; align-items: center; }
-        input { background: transparent; border: none; color: white; width: 100%; outline: none; text-align: center; font-size: 18px; }
-        #cevap { margin-top: 30px; font-size: 18px; color: #8ab4f8; text-align: center; padding: 0 20px; }
+        body { background: #1a1a1a; color: #e0e0e0; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; padding: 20px; }
+        #chat-box { width: 100%; max-width: 400px; height: 350px; border: 1px solid #444; overflow-y: scroll; padding: 15px; background: #252525; border-radius: 15px; margin-bottom: 10px; }
+        input { width: 75%; padding: 12px; border-radius: 8px; border: none; background: #333; color: white; }
+        button { padding: 12px 20px; background: #4caf50; border: none; border-radius: 8px; color: white; cursor: pointer; }
     </style>
 </head>
 <body>
-
-    <a href="index.html" class="back-btn">← Geri</a>
-
-    <h1 id="karsilama">Sohbet Asistanı</h1>
-    <div class="input-container">
-        <input type="text" id="userInput" placeholder="Bir şeyler yaz..." onkeypress="handleEnter(event)">
+    <h2>Asistanınla Konuş</h2>
+    <div id="chat-box"></div>
+    <div>
+        <input type="text" id="userInput" placeholder="Bir şeyler yaz...">
+        <button onclick="cevapVer()">Gönder</button>
     </div>
-    <div id="cevap"></div>
 
     <script>
-        function handleEnter(e) {
-            if (e.key === 'Enter') {
-                let giris = document.getElementById('userInput').value.toLowerCase().trim();
-                let cevapDiv = document.getElementById('cevap');
-                
-                // Selamlaşma için farklı cevaplar (Rastgele seçilecek)
-                let selamCevaplari = [
-                    "Selam! Günün nasıl geçiyor?",
-                    "Merhaba! Bugün neler yapıyorsun?",
-                    "Selam Yusuf, günün keyifli geçiyor mu?",
-                    "Merhaba! Seni görmek güzel, günün nasıl gidiyor?"
-                ];
-
-                if (giris.includes("selam") || giris.includes("merhaba")) {
-                    let rastgele = selamCevaplari[Math.floor(Math.random() * selamCevaplari.length)];
-                    cevapDiv.innerText = rastgele;
-                } else if (giris.includes("nasılsın")) {
-                    cevapDiv.innerText = "Teşekkür ederim, seninle sohbet etmek harika! Sen nasılsın?";
-                } else {
-                    cevapDiv.innerText = "Anladım... Bu konu hakkında başka neler anlatmak istersin?";
-                }
-                
-                document.getElementById('userInput').value = ""; // Kutuyu temizle
-            }
+        function cevapVer() {
+            let input = document.getElementById('userInput').value.toLowerCase();
+            let chatBox = document.getElementById('chat-box');
+            chatBox.innerHTML += "<p><b>Sen:</b> " + document.getElementById('userInput').value + "</p>";
+            
+            let cevap = "Hmm, bu konu üzerinde biraz düşünmem lazım! Oyunlarımızı mı geliştirsek ne dersin?";
+            
+            // Buraya "senin gibi" cevaplar ekleyelim
+            if (input.includes("merhaba") || input.includes("selam")) cevap = "Selam Yusuf! Yine kodlama günü, harika gidiyorsun.";
+            else if (input.includes("futbol")) cevap = "Futbol simülasyonu bende! Kaleciyi biraz daha zıplatalım mı, ne dersin?";
+            else if (input.includes("yarış")) cevap = "Yarış oyunu tıkır tıkır çalışıyor, biraz hız mı eklesek?";
+            else if (input.includes("kod")) cevap = "Kodlamak bazen kafa karıştırıcı olabilir ama beraber çözeriz, hallederiz!";
+            
+            chatBox.innerHTML += "<p><b>Asistan:</b> " + cevap + "</p>";
+            chatBox.scrollTop = chatBox.scrollHeight;
+            document.getElementById('userInput').value = "";
         }
     </script>
 </body>
 </html>
+
 
