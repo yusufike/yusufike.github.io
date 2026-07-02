@@ -4,46 +4,39 @@
     <meta charset="UTF-8">
     <title>Yusuf'un Asistanı</title>
     <style>
-        body { background: #1a1a1a; color: #e0e0e0; font-family: 'Segoe UI', sans-serif; display: flex; flex-direction: column; align-items: center; padding: 20px; }
-        #chat-box { width: 100%; max-width: 500px; height: 400px; border: 1px solid #444; overflow-y: scroll; padding: 20px; background: #252525; border-radius: 15px; margin-bottom: 15px; }
-        .mesaj-sen { color: #8ab4f8; margin-bottom: 10px; }
-        .mesaj-bot { color: #a1c9a1; margin-bottom: 10px; }
-        input { width: 70%; padding: 12px; border-radius: 8px; border: none; background: #333; color: white; }
-        button { padding: 12px 20px; background: #4caf50; border: none; border-radius: 8px; color: white; cursor: pointer; }
+        body { background: #121212; color: white; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; padding: 20px; }
+        #chat-box { width: 100%; max-width: 500px; height: 350px; border: 1px solid #333; overflow-y: scroll; padding: 15px; background: #1e1e1e; border-radius: 10px; margin-bottom: 10px; }
+        input { width: 70%; padding: 10px; }
+        button { padding: 10px; background: #4caf50; border: none; color: white; cursor: pointer; }
     </style>
 </head>
 <body>
-    <h2>Yapay Zeka Asistanın</h2>
+    <h2>Yusuf'un Yapay Zekası</h2>
     <div id="chat-box"></div>
-    <div>
-        <input type="text" id="userInput" placeholder="Bir şeyler sor...">
-        <button onclick="cevapVer()">Gönder</button>
-    </div>
+    <input type="text" id="userInput" placeholder="Bir şey sor...">
+    <button onclick="cevapVer()">Gönder</button>
 
     <script>
         function cevapVer() {
-            let input = document.getElementById('userInput').value.trim();
+            let input = document.getElementById('userInput').value.toLowerCase();
             let chatBox = document.getElementById('chat-box');
-            if (input === "") return;
+            chatBox.innerHTML += "<p><b>Sen:</b> " + document.getElementById('userInput').value + "</p>";
+            
+            // İşte sır: Matematik kelimesini yasakladık!
+            let cevap = "Bu konuyu henüz öğrenmedim ama oyunların hakkında konuşmaya bayılırım! Futbol oyunundaki şut mekaniğini geliştirelim mi?";
+            
+            if (input.includes("merhaba") || input.includes("selam")) cevap = "Selam Yusuf! Bugün kodlama dünyasında neler yapıyoruz?";
+            else if (input.includes("nasılsın")) cevap = "Sistemlerim tamamen senin projelerine odaklı, gayet iyiyim! Sen nasılsın?";
+            else if (input.includes("futbol")) cevap = "Futbol simülasyonu süper gidiyor. Kaleciyi daha zeki yapmamı ister misin?";
+            else if (input.includes("oyun")) cevap = "Oyun dünyası harika! Yarış mı, futbol mu, yoksa yeni bir fikir mi?";
 
-            chatBox.innerHTML += `<p class="mesaj-sen"><b>Sen:</b> ${input}</p>`;
-            let altInput = input.toLowerCase();
-            let cevap = "Bu konuyla ilgili öğrenmeye devam ediyorum. Futbol oyunumuz veya yarış oyunumuz hakkında konuşmaya ne dersin? Orada çok daha yetenekliyim!";
-
-            // İnsansı ve zeki yanıt mantığı
-            if (altInput.includes("merhaba") || altInput.includes("selam")) cevap = "Merhaba Yusuf! Bugün seni hangi kodlama projesiyle destekleyebilirim? Harika şeyler başaracağımıza eminim.";
-            else if (altInput.includes("nasılsın")) cevap = "Dijital dünyada seninle çalışmak harika! Kodlar tıkır tıkır işlediği sürece çok iyiyim, sen nasılsın?";
-            else if (altInput.includes("futbol")) cevap = "Futbol simülasyonu üzerinde çalışmak heyecan verici. Kalecinin yapay zekasını güçlendirebiliriz, ne dersin?";
-            else if (altInput.includes("kimsin")) cevap = "Ben senin kişisel asistanınım, Yusuf. Senin vizyonunla kodları şekillendirmek ve projelerini hayata geçirmek için buradayım.";
-            else if (altInput.includes("yardım")) cevap = "Tabii ki! Takıldığın her yerde yanındayım. Oyunlar mı, web tasarımı mı, yoksa yeni bir fikir mi?";
-
-            chatBox.innerHTML += `<p class="mesaj-bot"><b>Asistan:</b> ${cevap}</p>`;
-            chatBox.scrollTop = chatBox.scrollHeight;
+            chatBox.innerHTML += "<p><b>Asistan:</b> " + cevap + "</p>";
             document.getElementById('userInput').value = "";
         }
     </script>
 </body>
 </html>
+
 
 
 
