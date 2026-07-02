@@ -2,38 +2,53 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>Yusuf ile Sohbet</title>
+    <title>Yusuf'un Asistanı</title>
     <style>
         body { background: #000; color: #fff; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; }
-        .back-btn { position: absolute; top: 15px; left: 15px; color: #8ab4f8; text-decoration: none; }
-        .input-container { background: #1a1a1a; border-radius: 30px; padding: 20px; width: 80%; max-width: 400px; }
+        .back-btn { position: absolute; top: 15px; left: 15px; color: #8ab4f8; text-decoration: none; font-size: 16px; }
+        h1 { font-weight: 300; margin-bottom: 30px; }
+        .input-container { background: #1a1a1a; border-radius: 30px; padding: 20px; width: 80%; max-width: 400px; display: flex; align-items: center; }
         input { background: transparent; border: none; color: white; width: 100%; outline: none; text-align: center; font-size: 18px; }
         #cevap { margin-top: 30px; font-size: 18px; color: #8ab4f8; text-align: center; padding: 0 20px; }
     </style>
 </head>
 <body>
-    <a href="index.html" class="back-btn">← Menüye Dön</a>
-    <h1>Sohbet Asistanı</h1>
+
+    <a href="index.html" class="back-btn">← Geri</a>
+
+    <h1 id="karsilama">Sohbet Asistanı</h1>
     <div class="input-container">
-        <input type="text" id="sohbetInput" placeholder="Bir şey yaz..." onkeypress="sohbetEt(event)">
+        <input type="text" id="userInput" placeholder="Bir şeyler yaz..." onkeypress="handleEnter(event)">
     </div>
     <div id="cevap"></div>
 
     <script>
-        function sohbetEt(e) {
+        function handleEnter(e) {
             if (e.key === 'Enter') {
-                let giris = document.getElementById('sohbetInput').value.toLowerCase();
+                let giris = document.getElementById('userInput').value.toLowerCase().trim();
                 let cevapDiv = document.getElementById('cevap');
                 
+                // Selamlaşma için farklı cevaplar (Rastgele seçilecek)
+                let selamCevaplari = [
+                    "Selam! Günün nasıl geçiyor?",
+                    "Merhaba! Bugün neler yapıyorsun?",
+                    "Selam Yusuf, günün keyifli geçiyor mu?",
+                    "Merhaba! Seni görmek güzel, günün nasıl gidiyor?"
+                ];
+
                 if (giris.includes("selam") || giris.includes("merhaba")) {
-                    cevapDiv.innerText = "Selam! Günün nasıl geçiyor, sana nasıl yardımcı olabilirim?";
+                    let rastgele = selamCevaplari[Math.floor(Math.random() * selamCevaplari.length)];
+                    cevapDiv.innerText = rastgele;
                 } else if (giris.includes("nasılsın")) {
-                    cevapDiv.innerText = "Çok iyiyim, Yusuf'un asistanı olarak buradayım! Sen nasılsın?";
+                    cevapDiv.innerText = "Teşekkür ederim, seninle sohbet etmek harika! Sen nasılsın?";
                 } else {
-                    cevapDiv.innerText = "Seni anlıyorum, bu konu hakkında sohbet etmeye devam edebiliriz.";
+                    cevapDiv.innerText = "Anladım... Bu konu hakkında başka neler anlatmak istersin?";
                 }
+                
+                document.getElementById('userInput').value = ""; // Kutuyu temizle
             }
         }
     </script>
 </body>
 </html>
+
