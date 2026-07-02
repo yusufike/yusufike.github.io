@@ -2,22 +2,47 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>Sesli Asistan</title>
+    <title>Yusuf'un Asistanı</title>
+    <style>
+        body { background: #000; color: #fff; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+        h1 { font-weight: 300; margin-bottom: 30px; }
+        .input-container { background: #1a1a1a; border-radius: 30px; padding: 20px; width: 80%; max-width: 400px; display: flex; align-items: center; }
+        input { background: transparent; border: none; color: white; width: 100%; outline: none; text-align: center; font-size: 18px; }
+        #cevap { margin-top: 30px; font-size: 20px; color: #8ab4f8; text-align: center; }
+    </style>
 </head>
 <body>
-    <h1>Sesli Asistan</h1>
-    <button onclick="startDictation()">Dinle</button>
-    <p id="output"></p>
+
+    <h1 id="karsilama">Ne sormak istersin, Yusuf?</h1>
+    <div class="input-container">
+        <input type="text" id="userInput" placeholder="Matematik sorusu sor..." onkeypress="handleEnter(event)">
+    </div>
+    <div id="cevap"></div>
 
     <script>
-        function startDictation() {
-            var recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-            recognition.lang = 'tr-TR';
-            recognition.start();
-            recognition.onresult = function(event) {
-                document.getElementById('output').innerHTML = "Dediklerin: " + event.results[0][0].transcript;
-            };
+        let isim = localStorage.getItem('kullaniciIsmi') || "Yusuf";
+        
+        function handleEnter(e) {
+            if (e.key === 'Enter') {
+                let giris = document.getElementById('userInput').value.toLowerCase();
+                let cevapDiv = document.getElementById('cevap');
+                let sonuc;
+
+                if (giris.includes("+")) {
+                    let s = giris.split("+");
+                    sonuc = parseFloat(s[0]) + parseFloat(s[1]);
+                    cevapDiv.innerText = "Cevabı buldum: " + sonuc + ". Başka sorun var mı " + isim + "?";
+                } else if (giris.includes("*")) {
+                    let s = giris.split("*");
+                    sonuc = parseFloat(s[0]) * parseFloat(s[1]);
+                    cevapDiv.innerText = "Cevabı buldum: " + sonuc + ". Başka sorun var mı " + isim + "?";
+                } else {
+                    cevapDiv.innerText = "Bunu henüz bilmiyorum.";
+                }
+            }
         }
     </script>
 </body>
 </html>
+
+
