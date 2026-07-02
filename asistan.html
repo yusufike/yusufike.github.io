@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Sesli Asistan</title>
+</head>
+<body>
+    <h1>Sesli Asistan</h1>
+    <button onclick="startDictation()">Dinle</button>
+    <p id="output"></p>
+
+    <script>
+        function startDictation() {
+            var recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = 'tr-TR';
+            recognition.start();
+            recognition.onresult = function(event) {
+                document.getElementById('output').innerHTML = "Dediklerin: " + event.results[0][0].transcript;
+            };
+        }
+    </script>
+</body>
+</html>
