@@ -2,17 +2,47 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>Hoş Geldin</title>
+    <title>Giriş</title>
     <style>
-        body { background: linear-gradient(135deg, #000, #333); color: white; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: Arial; margin: 0; }
-        input { padding: 15px; border-radius: 20px; border: none; width: 250px; text-align: center; font-size: 1.2em; }
-        .btn { margin-top: 20px; background: #00d4ff; color: black; padding: 15px 30px; border-radius: 50px; border: none; cursor: pointer; font-size: 1.2em; }
+        body { 
+            background-color: #000; /* Tam siyah arka plan */
+            color: #fff; 
+            font-family: 'Google Sans', sans-serif; 
+            height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            margin: 0; 
+        }
+        h1 { font-size: 24px; font-weight: 400; margin-bottom: 40px; }
+        input { 
+            background: #1a1a1a; 
+            border: none; 
+            padding: 20px; 
+            width: 80%; 
+            max-width: 300px; 
+            border-radius: 25px; 
+            color: white; 
+            text-align: center; 
+            font-size: 18px; 
+        }
+        button { 
+            margin-top: 20px; 
+            background: #333; 
+            color: white; 
+            border: none; 
+            padding: 15px 30px; 
+            border-radius: 25px; 
+            cursor: pointer; 
+        }
     </style>
 </head>
 <body>
-    <h1 id="baslik">Hoş geldin kullanıcı!</h1>
-    <input type="text" id="isimInput" placeholder="İsmin ne?">
-    <button class="btn" onclick="kaydet()">Kaydet ve Giriş Yap</button>
+
+    <h1>Ne sormak istersin, Yusuf?</h1>
+    <input type="text" id="isimInput" placeholder="Adın nedir?">
+    <button onclick="kaydet()">Giriş Yap</button>
 
     <script>
         function kaydet() {
@@ -20,11 +50,10 @@
             if(isim) {
                 localStorage.setItem('kullaniciIsmi', isim);
                 window.location.href = 'index.html';
-            } else {
-                alert("Lütfen ismini gir!");
             }
         }
     </script>
 </body>
 </html>
+
 
