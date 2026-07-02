@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Sayı Tahmin & Akıl Oyunu</title>
+    <style>
+        body { background: #000; color: #fff; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; padding-top: 50px; margin: 0; text-align: center; }
+        .box { background: #1a1a1a; padding: 30px; border-radius: 20px; width: 85%; max-width: 450px; margin-top: 20px; }
+        button { padding: 12px 20px; font-size: 16px; cursor: pointer; border-radius: 10px; border: none; margin: 8px; background: #8ab4f8; color: #000; }
+        .btn-ipucu { background: #ff9800; color: #000; }
+        input { padding: 12px; font-size: 18px; border-radius: 10px; border: none; text-align: center; width: 80%; margin-bottom: 15px; background: #333; color: #fff; }
+        .back-btn { position: absolute; top: 15px; left: 15px; color: #8ab4f8; text-decoration: none; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <a href="oyunlar.html" class="back-btn">← Geri</a>
+    
+    <div id="menu-ekrani" class="box">
+        <h1>Sayı Tahmin Merkezi</h1>
+        <button onclick="oyunBaslat('kolay')">Çok Kolay</button>
+        <button onclick="oyunBaslat('normal')">Normal</button>
+        <button onclick="oyunBaslat('zor')">Çok Zor</button>
+    </div>
+
+    <div id="oyun-ekrani" class="box hidden">
+        <h2 id="oyun-baslik"></h2>
+        <input type="number" id="tahminInput" placeholder="Tahminini yaz...">
+        <br>
+        <button onclick="tahminEt()">Tahmin Et</button>
+        <button class="btn-ipucu" onclick="ipucuVer()">💡 İpucu Al</button>
+        <p id="mesaj"></p>
+        <button onclick="location.reload()" style="background:#555; color:#fff;">Menüye Dön</button>
+    </div>
+
+    <script>
+        let zorluk, tutulanSayi, can, ipucuHak;
+
+        function oyunBaslat(mod) {
+            zorluk = mod;
+            ipucuHak = 2; // Sadece zor mod için kullanılacak
+            document.getElementById('menu-ekrani').classList.add('hidden');
+            document.getElementById('oyun-ekrani').classList.remove('hidden');
+
+            if(mod === 'kolay') { tutulanSayi = Math.floor(Math.random()*10)+1; can = 2; }
+            else if(mod === 'normal') { tutulanSayi = Math.floor(Math.random()*20)+1; can = 3; }
+            else { tutulanSayi = Math.floor(Math.random()*25)+1; can = 5; }
+            
+            document.getElementById('oyun-baslik').innerText = mod.toUpperCase() + " Mod";
+        }
+
+        function tahminEt() {
+            let t = parseInt(document.getElementById('tahminInput').value);
+            if (t === tutulanSayi) {
+                let mesaj = (zorluk === 'kolay') ? "Aferin, kazandın!" : (zorluk === 'normal' ? "Kazandın, tebrikler!" : "Kazandın, bravo!");
+                document.getElementById('mesaj').innerText = mesaj;
+            } else {
+                can--;
+                if (can <= 0) {
+                    document.getElementById('mesaj').innerText = "Kaybettin, tekrar dene!";
+                } else {
+                    document.getElementById('mesaj').innerText = (t < tutulanSayi) ? "Daha büyük!" : "Daha küçük!";
+                }
+            }
+        }
+
+        function ipucuVer() {
+            if (zorluk === 'zor') {
+                if (ipucuHak > 0) {
+                    ipucuHak--;
+                    document.getElementById('mesaj').innerText = (tutulanSayi % 2 === 0) ? "İpucu: Sayı ÇİFT" : "İpucu: Sayı TEK";
+                } else {
+                    document.getElementById('mesaj').innerText = "İpucu hakkın bitti!";
+                }
+            } else {
+                document.getElementById('mesaj').innerText = (Math.random() > 0.5) ? "Daha büyük!" : "Daha küçük!";
+            }
+        }
+    </script>
+</body>
+</html>
