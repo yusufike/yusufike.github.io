@@ -1,9 +1,56 @@
 <!DOCTYPE html>
-<html>
-<body style="background:#006600; color:white; font-family:sans-serif; text-align:center; padding:50px;">
-    <h1>Futbol Sahası</h1>
-    <h2 id="skor">Skor: 0-0</h2>
-    <button onclick="alert('GOL ATILDI!')" style="padding:15px; font-size:18px;">Şut Çek!</button>
-    <br><br><a href="oyunlar.html" style="color:white;">Geri Dön</a>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Futbol Penaltı Oyunu</title>
+    <style>
+        body { background: #000; color: #fff; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+        .game-box { background: #1a1a1a; padding: 30px; border-radius: 20px; text-align: center; width: 80%; max-width: 400px; }
+        #süre, #skor { font-size: 20px; margin: 10px; color: #8ab4f8; }
+        button { padding: 15px 30px; font-size: 18px; cursor: pointer; border-radius: 10px; border: none; background: #8ab4f8; color: #000; }
+        .back-btn { position: absolute; top: 15px; left: 15px; color: #8ab4f8; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <a href="oyunlar.html" class="back-btn">← Geri</a>
+    
+    <div class="game-box">
+        <h1>Penaltı Atışı</h1>
+        <div id="süre">Süre: 30</div>
+        <div id="skor">Gol: 0 | Kaçan: 0</div>
+        <br>
+        <button onclick="sutCek()">Şut Çek! ⚽</button>
+        <p id="mesaj"></p>
+    </div>
+
+    <script>
+        let sure = 30;
+        let gol = 0;
+        let kacan = 0;
+
+        let timer = setInterval(() => {
+            sure--;
+            document.getElementById('süre').innerText = "Süre: " + sure;
+            if (sure <= 0) {
+                clearInterval(timer);
+                alert("Oyun Bitti! Toplam Skor: " + gol + " Gol.");
+                location.reload();
+            }
+        }, 1000);
+
+        function sutCek() {
+            if (sure > 0) {
+                if (Math.random() > 0.5) {
+                    gol++;
+                    document.getElementById('mesaj').innerText = "GOL! Harika şut.";
+                } else {
+                    kacan++;
+                    document.getElementById('mesaj').innerText = "Ah, kaleci kurtardı!";
+                }
+                document.getElementById('skor').innerText = "Gol: " + gol + " | Kaçan: " + kacan;
+            }
+        }
+    </script>
 </body>
 </html>
+
