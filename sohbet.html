@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <title>Yusuf'un Asistanı</title>
     <style>
-        body { background: #121212; color: white; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; padding: 20px; }
+        body { background: #121212; color: #e0e0e0; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; padding: 20px; }
         #chat-box { width: 100%; max-width: 500px; height: 350px; border: 1px solid #333; overflow-y: scroll; padding: 15px; background: #1e1e1e; border-radius: 10px; margin-bottom: 10px; }
-        input { width: 70%; padding: 10px; }
-        button { padding: 10px; background: #4caf50; border: none; color: white; cursor: pointer; }
+        input { width: 70%; padding: 10px; border-radius: 5px; border: 1px solid #444; background: #222; color: white; }
+        button { padding: 10px; background: #4caf50; border: none; color: white; cursor: pointer; border-radius: 5px; }
     </style>
 </head>
 <body>
-    <h2>Yusuf'un Yapay Zekası</h2>
+    <h2>Yusuf'un Asistanı v2.0</h2>
     <div id="chat-box"></div>
-    <input type="text" id="userInput" placeholder="Bir şey sor...">
+    <input type="text" id="userInput" placeholder="Bir şeyler yaz...">
     <button onclick="cevapVer()">Gönder</button>
 
     <script>
@@ -22,20 +22,31 @@
             let chatBox = document.getElementById('chat-box');
             chatBox.innerHTML += "<p><b>Sen:</b> " + document.getElementById('userInput').value + "</p>";
             
-            // İşte sır: Matematik kelimesini yasakladık!
-            let cevap = "Bu konuyu henüz öğrenmedim ama oyunların hakkında konuşmaya bayılırım! Futbol oyunundaki şut mekaniğini geliştirelim mi?";
+            let cevap = "Bu konuyla ilgili henüz tam bilgiye sahip değilim ama öğrenmeye çok açığım! Başka nelerden konuşabiliriz?";
             
-            if (input.includes("merhaba") || input.includes("selam")) cevap = "Selam Yusuf! Bugün kodlama dünyasında neler yapıyoruz?";
-            else if (input.includes("nasılsın")) cevap = "Sistemlerim tamamen senin projelerine odaklı, gayet iyiyim! Sen nasılsın?";
-            else if (input.includes("futbol")) cevap = "Futbol simülasyonu süper gidiyor. Kaleciyi daha zeki yapmamı ister misin?";
-            else if (input.includes("oyun")) cevap = "Oyun dünyası harika! Yarış mı, futbol mu, yoksa yeni bir fikir mi?";
+            // Sohbet mantığı
+            if (input.includes("merhaba") || input.includes("selam")) cevap = "Selam Yusuf! Bugün neler başarmayı planlıyoruz?";
+            else if (input.includes("nasılsın")) cevap = "Kodlarım ve devrelerim tam performans çalışıyor, sen nasılsın?";
+            else if (input.includes("futbol")) cevap = "Futbol oyunu üzerinde çalışmak çok zevkli, kaleci için yeni bir taktik denesek mi?";
+            else if (input.includes("yaris")) cevap = "Yarış oyununda hız rekorlarını kırmaya hazır mısın?";
+            
+            // Matematik özelliği (Buraya ekliyoruz!)
+            else if (input.includes("+") || input.includes("-") || input.includes("*") || input.includes("/")) {
+                try {
+                    cevap = "Hemen hesaplıyorum: " + eval(input);
+                } catch(e) {
+                    cevap = "Matematiksel bir hata oluştu, işlemi düzgün girdiğinden emin misin?";
+                }
+            }
 
             chatBox.innerHTML += "<p><b>Asistan:</b> " + cevap + "</p>";
+            chatBox.scrollTop = chatBox.scrollHeight;
             document.getElementById('userInput').value = "";
         }
     </script>
 </body>
 </html>
+
 
 
 
