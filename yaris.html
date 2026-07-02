@@ -2,43 +2,38 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>Araba Yarışı</title>
+    <title>Sayı Tahmin & Yarış</title>
     <style>
-        body { background: #333; text-align: center; color: white; }
-        #yol { width: 300px; height: 500px; background: gray; margin: 20px auto; position: relative; overflow: hidden; border: 5px solid white; }
-        #araba { width: 50px; height: 80px; background: blue; position: absolute; bottom: 20px; left: 125px; }
-        #engel { width: 50px; height: 50px; background: red; position: absolute; top: -50px; left: 125px; }
+        #yol { width: 400px; height: 50px; background: #555; position: relative; margin-bottom: 20px; }
+        #araba { width: 50px; height: 50px; background: red; position: absolute; left: 0; transition: 0.5s; }
     </style>
 </head>
 <body>
-    <h1>Araba Yarışı</h1>
-    <div id="yol">
-        <div id="araba"></div>
-        <div id="engel"></div>
-    </div>
-    <p>Engellere çarpma!</p>
+    <h1>Sayı Tahmin Ettikçe Araba İlerler!</h1>
+    <div id="yol"><div id="araba"></div></div>
+    
+    <input type="number" id="tahmin" placeholder="1-100 arası">
+    <button onclick="oyna()">Tahmin Et</button>
+    <p id="mesaj"></p>
 
     <script>
-        let araba = document.getElementById('araba');
-        let engel = document.getElementById('engel');
-        let engelY = -50;
+        let hedefSayi = Math.floor(Math.random() * 100) + 1;
+        let konum = 0;
 
-        // Araba kontrolü (klavye)
-        document.onkeydown = (e) => {
-            let left = parseInt(araba.style.left);
-            if (e.key === "ArrowLeft" && left > 0) araba.style.left = (left - 20) + "px";
-            if (e.key === "ArrowRight" && left < 250) araba.style.left = (left + 20) + "px";
-        };
+        function oyna() {
+            let tahmin = document.getElementById('tahmin').value;
+            let araba = document.getElementById('araba');
+            let mesaj = document.getElementById('mesaj');
 
-        // Engel hareketi
-        setInterval(() => {
-            engelY += 10;
-            if (engelY > 500) { engelY = -50; engel.style.left = (Math.random() * 250) + "px"; }
-            engel.style.top = engelY + "px";
-        }, 50);
+            if (tahmin == hedefSayi) {
+                konum += 50;
+                araba.style.left = konum + "px";
+                mesaj.innerText = "Doğru! Araba hızlandı ve ilerledi!";
+                hedefSayi = Math.floor(Math.random() * 100) + 1; // Yeni sayı
+            } else {
+                mesaj.innerText = "Yanlış! Tekrar dene.";
+            }
+        }
     </script>
 </body>
 </html>
-
-
-
