@@ -2,48 +2,21 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>Giriş</title>
+    <title>Yusuf Asistan Giriş</title>
     <style>
-        body { 
-            background-color: #000; /* Tam siyah arka plan */
-            color: #fff; 
-            font-family: 'Google Sans', sans-serif; 
-            height: 100vh; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: center; 
-            margin: 0; 
-        }
-        h1 { font-size: 24px; font-weight: 400; margin-bottom: 40px; }
-        input { 
-            background: #1a1a1a; 
-            border: none; 
-            padding: 20px; 
-            width: 80%; 
-            max-width: 300px; 
-            border-radius: 25px; 
-            color: white; 
-            text-align: center; 
-            font-size: 18px; 
-        }
-        button { 
-            margin-top: 20px; 
-            background: #333; 
-            color: white; 
-            border: none; 
-            padding: 15px 30px; 
-            border-radius: 25px; 
-            cursor: pointer; 
-        }
+        body { background: #000; color: #fff; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+        h1 { font-weight: 300; margin-bottom: 30px; }
+        .input-box { background: #1a1a1a; padding: 20px; border-radius: 25px; width: 80%; max-width: 400px; display: flex; }
+        input { background: none; border: none; color: white; width: 100%; font-size: 18px; outline: none; }
+        button { background: #333; color: white; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; }
     </style>
 </head>
 <body>
-
     <h1>Ne sormak istersin, Yusuf?</h1>
-    <input type="text" id="isimInput" placeholder="Adın nedir?">
-    <button onclick="kaydet()">Giriş Yap</button>
-
+    <div class="input-box">
+        <input type="text" id="isimInput" placeholder="Adın nedir?">
+        <button onclick="kaydet()">Giriş</button>
+    </div>
     <script>
         function kaydet() {
             let isim = document.getElementById('isimInput').value;
@@ -55,5 +28,6 @@
     </script>
 </body>
 </html>
+
 
 
