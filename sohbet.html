@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Yusuf ile Sohbet</title>
+    <style>
+        body { background: #000; color: #fff; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+        .back-btn { position: absolute; top: 15px; left: 15px; color: #8ab4f8; text-decoration: none; }
+        .input-container { background: #1a1a1a; border-radius: 30px; padding: 20px; width: 80%; max-width: 400px; }
+        input { background: transparent; border: none; color: white; width: 100%; outline: none; text-align: center; font-size: 18px; }
+        #cevap { margin-top: 30px; font-size: 18px; color: #8ab4f8; text-align: center; padding: 0 20px; }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">← Menüye Dön</a>
+    <h1>Sohbet Asistanı</h1>
+    <div class="input-container">
+        <input type="text" id="sohbetInput" placeholder="Bir şey yaz..." onkeypress="sohbetEt(event)">
+    </div>
+    <div id="cevap"></div>
+
+    <script>
+        function sohbetEt(e) {
+            if (e.key === 'Enter') {
+                let giris = document.getElementById('sohbetInput').value.toLowerCase();
+                let cevapDiv = document.getElementById('cevap');
+                
+                if (giris.includes("selam") || giris.includes("merhaba")) {
+                    cevapDiv.innerText = "Selam! Günün nasıl geçiyor, sana nasıl yardımcı olabilirim?";
+                } else if (giris.includes("nasılsın")) {
+                    cevapDiv.innerText = "Çok iyiyim, Yusuf'un asistanı olarak buradayım! Sen nasılsın?";
+                } else {
+                    cevapDiv.innerText = "Seni anlıyorum, bu konu hakkında sohbet etmeye devam edebiliriz.";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
