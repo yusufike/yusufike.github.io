@@ -7,69 +7,57 @@
         body { background: #0a0a0c; color: white; font-family: sans-serif; padding: 20px; }
         .menu { margin-top: 20px; }
         button { padding: 10px; margin: 5px; cursor: pointer; background: #7c3aed; color: white; border: none; border-radius: 5px; }
-        #cevapAlani { margin-top: 20px; padding: 15px; border: 1px solid #332d4a; border-radius: 10px; min-height: 150px; background: #1a1a23; }
+        #cevapAlani { margin-top: 20px; padding: 15px; border: 1px solid #332d4a; border-radius: 10px; min-height: 200px; background: #1a1a23; }
         input { padding: 10px; width: 60%; border-radius: 5px; border: none; }
     </style>
 </head>
 <body>
 
     <h2>Coğrafya & Tarih</h2>
-    
-    <input type="text" id="tarihInput" placeholder="Fatih, Kahramanlar veya Savaşlar yaz...">
+    <input type="text" id="tarihInput" placeholder="Savaş, Padişah veya Kahraman yaz...">
     <button onclick="cevapVer()">Ara</button>
 
     <div class="menu">
         <button onclick="goster('kahramanlar')">🏆 10 Kahraman</button>
         <button onclick="goster('savaslar')">⚔️ 15 Savaş</button>
         <button onclick="goster('padisahlar')">👑 17 Padişah</button>
-        <button onclick="goster('kulturlar')">🌍 10 Ülke Kültürü</button>
+        <button onclick="goster('kulturlar')">🌍 10 Kültür</button>
     </div>
 
-    <div id="cevapAlani">Bir kategori seç veya arama yap.</div>
+    <div id="cevapAlani">Kategorilere bas veya arama yap.</div>
 
     <script>
         function goster(tur) {
             let alan = document.getElementById('cevapAlani');
             if(tur == 'kahramanlar') {
-                alan.innerHTML = "<h3>🏆 10 Büyük Kahraman</h3><ul><li>Alparslan</li><li>Fatih Sultan Mehmet</li><li>Atatürk</li><li>Seyit Onbaşı</li><li>Barbaros Hayrettin Paşa</li><li>Mete Han</li><li>Tomris Hatun</li><li>Ulubatlı Hasan</li><li>Nene Hatun</li><li>Ömer Halisdemir</li></ul>";
+                alan.innerHTML = "<h3>🏆 10 Büyük Kahraman</h3><ul><li>Alparslan</li><li>Fatih Sultan Mehmet</li><li>Atatürk</li><li>Seyit Onbaşı</li><li>Barbaros</li><li>Mete Han</li><li>Tomris Hatun</li><li>Ulubatlı Hasan</li><li>Nene Hatun</li><li>Ömer Halisdemir</li></ul>";
             } else if(tur == 'savaslar') {
-    alan.innerHTML = "<h3>⚔️ 15 Önemli Savaş</h3><ul>" +
-    "<li>Malazgirt Meydan Muharebesi</li><li>Kösedağ Savaşı</li><li>Kosova Savaşı</li><li>Niğbolu Savaşı</li>" +
-    "<li>Ankara Savaşı</li><li>Varna Savaşı</li><li>İstanbul'un Fethi</li><li>Otlukbeli Savaşı</li><li>Çaldıran Savaşı</li>" +
-    "<li>Mercidabık Savaşı</li><li>Ridaniye Savaşı</li><li>Mohaç Meydan Muharebesi</li><li>Preveze Deniz Zaferi</li><li>Çanakkale Savaşları</li><li>Kurtuluş Savaşı</li></ul>";
-            }
-                alan.innerHTML = "<h3>⚔️ 15 Büyük Savaş</h3><p>Tarihimizin dönüm noktası olan savaşlar listesi buraya eklenecek.</p>";
+                alan.innerHTML = "<h3>⚔️ 15 Önemli Savaş</h3><ul><li>Malazgirt</li><li>Kösedağ</li><li>Kosova</li><li>Niğbolu</li><li>Ankara</li><li>Varna</li><li>İstanbul Fethi</li><li>Otlukbeli</li><li>Çaldıran</li><li>Mercidabık</li><li>Ridaniye</li><li>Mohaç</li><li>Preveze</li><li>Çanakkale</li><li>Kurtuluş Savaşı</li></ul>";
             } else if(tur == 'padisahlar') {
-    alan.innerHTML = "<h3>👑 17 Önemli Osmanlı Padişahı</h3><ul>" +
-    "<li>Osman Gazi</li><li>Orhan Gazi</li><li>I. Murad</li><li>Yıldırım Bayezid</li><li>Çelebi Mehmed</li>" +
-    "<li>II. Murad</li><li>Fatih Sultan Mehmet</li><li>II. Bayezid</li><li>Yavuz Sultan Selim</li><li>Kanuni Sultan Süleyman</li>" +
-    "<li>II. Selim</li><li>III. Murad</li><li>III. Mehmed</li><li>I. Ahmed</li><li>IV. Murad</li><li>III. Mustafa</li><li>II. Mahmud</li></ul>";
-            }
-                alan.innerHTML = "<h3>👑 17 Padişah</h3><ul><li>1. Osman Gazi</li><li>2. Orhan Gazi</li><li>...diğerleri...</li></ul>";
+                alan.innerHTML = "<h3>👑 17 Önemli Padişah</h3><ul><li>Osman Gazi</li><li>Orhan Gazi</li><li>I. Murad</li><li>Yıldırım Bayezid</li><li>Çelebi Mehmed</li><li>II. Murad</li><li>Fatih Sultan Mehmet</li><li>II. Bayezid</li><li>Yavuz Sultan Selim</li><li>Kanuni</li><li>II. Selim</li><li>III. Murad</li><li>III. Mehmed</li><li>I. Ahmed</li><li>IV. Murad</li><li>III. Mustafa</li><li>II. Mahmud</li></ul>";
             } else if(tur == 'kulturlar') {
-    alan.innerHTML = "<h3>🌍 10 Ülke Kültürü</h3><ul>" +
-    "<li>Türk: Misafirperverlik</li><li>Japon: Disiplin</li><li>İtalyan: Sanat</li><li>Fransız: Gastronomi</li><li>Çin: Gelenek</li>" +
-    "<li>Hint: Renkli festivaller</li><li>Mısır: Tarihi miras</li><li>Brezilya: Dans ve eğlence</li><li>İspanyol: Flamenco</li><li>Alman: Mühendislik</li></ul>";
-            }
-                alan.innerHTML = "<h3>🌍 Dünya Kültürleri</h3><p>Seçkin 10 ülke kültürü incelemesi.</p>";
+                alan.innerHTML = "<h3>🌍 10 Ülke Kültürü</h3><ul><li>Türk: Misafirperverlik</li><li>Japon: Disiplin</li><li>İtalyan: Sanat</li><li>Fransız: Gastronomi</li><li>Çin: Gelenek</li><li>Hint: Festivaller</li><li>Mısır: Tarih</li><li>Brezilya: Dans</li><li>İspanyol: Flamenco</li><li>Alman: Mühendislik</li></ul>";
             }
         }
-            function cevapVer() {
-        let girdi = document.getElementById('tarihInput').value.toLowerCase();
-        let alan = document.getElementById('cevapAlani');
-        
-        if(girdi.includes("kahraman")) {
-            goster('kahramanlar');
-        } else if(girdi.includes("fatih")) {
-            alan.innerHTML = "<b>Fatih Sultan Mehmet:</b> 1432 Edirne doğumlu. İstanbul'u fetheden 7. Osmanlı Padişahıdır.";
-        } else if(girdi.includes("malazgirt")) {
-            alan.innerHTML = "<b>Malazgirt Meydan Muharebesi (1071):</b> Sultan Alparslan komutasındaki Selçuklu ordusunun Bizans'ı mağlup ederek Anadolu'nun kapılarını Türklere açtığı zaferdir.";
-        } else {
-            alan.innerHTML = "Asistan: '" + girdi + "' konusunda bilgim yok.";
+
+        function cevapVer() {
+            let girdi = document.getElementById('tarihInput').value.toLowerCase();
+            let alan = document.getElementById('cevapAlani');
+            
+            if(girdi.includes("kahraman")) { goster('kahramanlar'); }
+            else if(girdi.includes("savaş")) { goster('savaslar'); }
+            else if(girdi.includes("padişah")) { goster('padisahlar'); }
+            else if(girdi.includes("kültür")) { goster('kulturlar'); }
+            else if(girdi.includes("malazgirt")) { alan.innerHTML = "<b>Malazgirt (1071):</b> Anadolu'nun kapılarını Türklere açan zafer."; }
+            else if(girdi.includes("fatih")) { alan.innerHTML = "<b>Fatih Sultan Mehmet:</b> İstanbul'u fetheden 7. Osmanlı Padişahıdır."; }
+            else { alan.innerHTML = "Bilgi bulunamadı, butonları kullanabilirsin."; }
         }
-            }
+    </script>
 </body>
 </html>
+
+
+
 
 
 
