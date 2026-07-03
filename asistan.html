@@ -11,21 +11,27 @@
     <div id="cevap"></div>
     <script>
         async function calistir() {
+            const API_KEY = "AQ.Ab8RN6Iy5ksk2M0LgfFVGdrp14Aw4RGFerNWw4QUzHtNwJYn8A";
             let input = document.getElementById('input').value;
             let cevap = document.getElementById('cevap');
-            cevap.innerText = "Bekle, istek gönderiliyor...";
-            // Buradaki proxy adresi tarayıcı engellerini aşmanı sağlar
-            let url = "https://api.allorigins.win/get?url=" + encodeURIComponent("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AQ.Ab8RN6Iy5ksk2M0LgfFVGdrp14Aw4RGFerNWw4QUzHtNwJYn8A");
+            cevap.innerText = "Bekle, istek gönderiliyor...";  
+            // Proxy ile Google'a bağlanıyoruz
+            let targetUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + API_KEY;
+            let url = "https://api.allorigins.win/get?url=" + encodeURIComponent(targetUrl);
             try {
-                let response = await fetch(url, {
+                let response = await fetch(targetUrl, { // Proxy bazen POST isteklerini bozduğu için doğrudan burayı deniyoruz
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({ contents: [{ parts: [{ text: input }] }] })
                 });
                 let data = await response.json();
-                cevap.innerText = "Başarılı! Bağlantı kuruldu, kod çalışıyor.";
+                if(data.candidates) {
+                    cevap.innerText = data.candidates[0].content.parts[0].text;
+                } else {
+                    cevap.innerText = "Hata oluştu: " + JSON.stringify(data);
+                }
             } catch (e) {
-                cevap.innerText = "Hata: " + e.message;
+                cevap.innerText = "Bağlantı Hatası: " + e.message;
             }
         }
     </script>
