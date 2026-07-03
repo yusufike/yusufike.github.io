@@ -16,22 +16,19 @@
     </style>
 </head>
 <body>
-
 <div class="panel">
     <h2>🤖 Yusuf AI</h2>
     <div id="asistanCevap">Selam! Bugün ne hakkında konuşalım?</div>
     <input type="text" id="asistanInput" placeholder="Soru sor...">
     <button class="btn" onclick="cevapVer()">Sistemi Çalıştır</button>
-    
     <div style="margin-top: 20px;">
         <a href="matematik.html" class="modul-btn">Matematik Modülü</a>
         <a href="cografya.html" class="modul-btn">Coğrafya Modülü</a>
     </div>
 </div>
-
 <script>
     async function cevapVer() {
-        const API_KEY = "AQ.Ab8RN6JD6VVg4WCi7fk8nz2mrMjn53iVktNv5gTSJizIU-rFRg"; 
+        const API_KEY = "AQ.Ab8RN6Iy5ksk2M0LgfFVGdrp14Aw4RGFerNWw4QUzHtNwJYn8A"; 
         let input = document.getElementById('asistanInput').value;
         let cevapAlani = document.getElementById('asistanCevap');
         if(!input) return;
@@ -49,7 +46,7 @@
             msg.lang = 'tr-TR';
             window.speechSynthesis.speak(msg);
         } catch (error) {
-            cevapAlani.innerText = "Sistem hatası oluştu!";
+            cevapAlani.innerText = "Hata oluştu! Lütfen tekrar dene.";
         }
     }
 </script>
