@@ -3,38 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yusuf'un Portalı</title>
+    <title>Yusuf | Portal v1.0</title>
     <style>
-        :root { --bg: #0a0a0c; --card: #15151b; --primary: #6366f1; }
-        body { background: var(--bg); color: white; font-family: 'Segoe UI', sans-serif; display: flex; flex-direction: column; align-items: center; padding: 40px; }
-        
-        /* Sistem Durumu */
-        .status { margin-bottom: 30px; font-size: 0.8rem; color: #888; display: flex; align-items: center; gap: 8px; }
-        .dot { height: 8px; width: 8px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 10px #22c55e; }
-
-        .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; max-width: 600px; }
+        :root { 
+            --bg: #0a0a0c; 
+            --glass: rgba(255, 255, 255, 0.05); 
+            --primary: #6366f1; 
+        }
+        body { 
+            background: var(--bg); 
+            color: white; 
+            font-family: 'Segoe UI', sans-serif; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            padding: 40px; 
+            min-height: 100vh; 
+            margin: 0; 
+        }
+        h1 { margin-bottom: 10px; }
+        p { color: #666; margin-bottom: 30px; }
         
         .card { 
-            background: var(--card); padding: 30px; border-radius: 20px; 
-            border: 1px solid #333; transition: 0.3s; text-decoration: none; color: white; text-align: center;
+            background: var(--glass); 
+            backdrop-filter: blur(10px); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            padding: 30px; 
+            border-radius: 25px; 
+            transition: 0.4s; 
+            text-decoration: none; 
+            color: white; 
+            width: 100%; 
+            max-width: 500px; 
+            text-align: center; 
+            margin-bottom: 20px; 
         }
-        .card:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
-        
-        h2 { margin: 0; font-size: 1.2rem; }
+        .card:hover { 
+            transform: translateY(-10px); 
+            border-color: var(--primary); 
+            background: rgba(99, 102, 241, 0.1);
+        }
     </style>
 </head>
 <body>
 
-    <div class="status">
-        <div class="dot"></div> Sistemler Çevrimiçi
-    </div>
-
     <h1>Yusuf'un Portalı</h1>
+    <p>Sistemler hazır, seçimini yap.</p>
 
-    <div class="menu-grid">
-        <a href="asistan.html" class="card">🤖 Asistan</a>
-        <a href="tahmin.html" class="card">🎲 Oyun Merkezi</a>
-    </div>
+    <a href="asistan.html" class="card">
+        <h2>🤖 Yapay Zeka Asistanı</h2>
+    </a>
+    
+    <a href="tahmin.html" class="card">
+        <h2>🎲 Oyun Merkezi</h2>
+    </a>
 
 </body>
 </html>
