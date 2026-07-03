@@ -2,73 +2,39 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yusuf'un Portalı</title>
     <style>
-        body { background: #0a0a0c; color: white; font-family: sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
-        .container { background: #15151b; border: 2px solid #332d4a; border-radius: 20px; padding: 25px; width: 90%; max-width: 400px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .ekran { display: none; }
-        #menu { display: block; }
-        h2 { color: #fff; margin-bottom: 20px; }
-        .btn { display: block; width: 100%; padding: 15px; margin: 10px 0; background: #22222d; border: 1px solid #444; color: white; border-radius: 12px; cursor: pointer; text-align: center; }
-        .btn:hover { background: #333345; }
-        .back-btn { color: #8e8e9e; cursor: pointer; margin-bottom: 15px; display: inline-block; font-size: 14px; }
+        :root { --bg: #0a0a0c; --card: #15151b; --primary: #6366f1; }
+        body { background: var(--bg); color: white; font-family: 'Segoe UI', sans-serif; display: flex; flex-direction: column; align-items: center; padding: 40px; }
         
-        /* Asistan'a özel stil */
-        input { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 10px; border: none; background: #222; color: white; box-sizing: border-box; }
-        .mor-btn { width: 100%; padding: 12px; border-radius: 10px; border: none; background: #7c3aed; color: white; font-weight: bold; cursor: pointer; }
-        .cevap-alani { background: #1a1a23; padding: 15px; border-radius: 10px; margin-top: 15px; text-align: left; font-size: 14px; }
+        /* Sistem Durumu */
+        .status { margin-bottom: 30px; font-size: 0.8rem; color: #888; display: flex; align-items: center; gap: 8px; }
+        .dot { height: 8px; width: 8px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 10px #22c55e; }
+
+        .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; max-width: 600px; }
+        
+        .card { 
+            background: var(--card); padding: 30px; border-radius: 20px; 
+            border: 1px solid #333; transition: 0.3s; text-decoration: none; color: white; text-align: center;
+        }
+        .card:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+        
+        h2 { margin: 0; font-size: 1.2rem; }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <!-- ANA MENÜ -->
-        <div id="menu" class="ekran" style="display:block;">
-            <h2>Yusuf'un Dünyası</h2>
-            <div class="btn" onclick="goster('asistan-ekran')">🤖 Asistan</div>
-            <div class="btn" onclick="goster('yaris-ekran')">🏎️ Yarış</div>
-            <div class="btn" onclick="goster('futbol-ekran')">⚽ Futbol</div>
-            <div class="btn" onclick="goster('tahmin-ekran')">🎯 Sayı Tahmin</div>
-        </div>
-
-        <!-- ASİSTAN (Gönder Butonlu) -->
-        <div id="asistan-ekran" class="ekran">
-            <div class="back-btn" onclick="goster('menu')">← Geri</div>
-            <h2>Asistan</h2>
-            <input type="text" id="asistanInput" placeholder="Bir şeyler yaz...">
-            <button class="mor-btn" onclick="cevapVer()">Gönder</button>
-            <div class="cevap-alani" id="asistanCevap">Asistan: Seni dinliyorum...</div>
-        </div>
-
-        <!-- OYUNLAR (Gönder butonu yok, kendi oyun kodlarını buraya ekleyeceksin) -->
-        <div id="yaris-ekran" class="ekran">
-            <div class="back-btn" onclick="goster('menu')">← Geri</div>
-            <h2>Yarış Ekranı</h2>
-            <p>Buraya kendi yarış kodlarını yerleştirebilirsin.</p>
-        </div>
-
-        <div id="futbol-ekran" class="ekran">
-            <div class="back-btn" onclick="goster('menu')">← Geri</div>
-            <h2>Futbol Ekranı</h2>
-            <p>Buraya kendi futbol kodlarını yerleştirebilirsin.</p>
-        </div>
-
-        <div id="tahmin-ekran" class="ekran">
-            <div class="back-btn" onclick="goster('menu')">← Geri</div>
-            <h2>Sayı Tahmin Ekranı</h2>
-            <p>Buraya kendi tahmin kodlarını yerleştirebilirsin.</p>
-        </div>
+    <div class="status">
+        <div class="dot"></div> Sistemler Çevrimiçi
     </div>
 
-    <script>
-        function goster(id) {
-            document.querySelectorAll('.ekran').forEach(e => e.style.display = 'none');
-            document.getElementById(id).style.display = 'block';
-        }
-        function cevapVer() {
-            let giris = document.getElementById('asistanInput').value;
-            document.getElementById('asistanCevap').innerText = "Asistan: " + giris + " konusunu henüz bilmiyorum.";
-        }
-    </script>
+    <h1>Yusuf'un Portalı</h1>
+
+    <div class="menu-grid">
+        <a href="asistan.html" class="card">🤖 Asistan</a>
+        <a href="tahmin.html" class="card">🎲 Oyun Merkezi</a>
+    </div>
+
 </body>
 </html>
