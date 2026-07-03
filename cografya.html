@@ -2,7 +2,7 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>Coğrafya & Tarih</title>
+    <title>Coğrafya & Tarih Asistanı</title>
     <style>
         body { background: #0a0a0c; color: white; font-family: sans-serif; padding: 20px; }
         .menu { margin-top: 20px; }
@@ -12,8 +12,7 @@
     </style>
 </head>
 <body>
-
-    <h2>Coğrafya & Tarih</h2>
+    <h2>Coğrafya & Tarih Asistanı</h2>
     <input type="text" id="tarihInput" placeholder="Savaş, Padişah veya Kahraman yaz...">
     <button onclick="cevapVer()">Ara</button>
 
@@ -23,9 +22,7 @@
         <button onclick="goster('padisahlar')">👑 17 Padişah</button>
         <button onclick="goster('kulturlar')">🌍 10 Kültür</button>
     </div>
-
     <div id="cevapAlani">Kategorilere bas veya arama yap.</div>
-
     <script>
         function goster(tur) {
             let alan = document.getElementById('cevapAlani');
@@ -39,22 +36,24 @@
                 alan.innerHTML = "<h3>🌍 10 Ülke Kültürü</h3><ul><li>Türk: Misafirperverlik</li><li>Japon: Disiplin</li><li>İtalyan: Sanat</li><li>Fransız: Gastronomi</li><li>Çin: Gelenek</li><li>Hint: Festivaller</li><li>Mısır: Tarih</li><li>Brezilya: Dans</li><li>İspanyol: Flamenco</li><li>Alman: Mühendislik</li></ul>";
             }
         }
-
         function cevapVer() {
             let girdi = document.getElementById('tarihInput').value.toLowerCase();
             let alan = document.getElementById('cevapAlani');
-            
             if(girdi.includes("kahraman")) { goster('kahramanlar'); }
             else if(girdi.includes("savaş")) { goster('savaslar'); }
             else if(girdi.includes("padişah")) { goster('padisahlar'); }
             else if(girdi.includes("kültür")) { goster('kulturlar'); }
             else if(girdi.includes("malazgirt")) { alan.innerHTML = "<b>Malazgirt (1071):</b> Anadolu'nun kapılarını Türklere açan zafer."; }
             else if(girdi.includes("fatih")) { alan.innerHTML = "<b>Fatih Sultan Mehmet:</b> İstanbul'u fetheden 7. Osmanlı Padişahıdır."; }
-            else { alan.innerHTML = "Bilgi bulunamadı, butonları kullanabilirsin."; }
+            else if(girdi.includes("türkiye")) { alan.innerHTML = "<b>Türkiye:</b> Asya ve Avrupa'yı bağlayan jeopolitik önemi yüksek bir ülkedir."; }
+            else if(girdi.includes("izmir")) { alan.innerHTML = "<b>İzmir:</b> Ege'nin incisi, modern ve köklü bir liman kentidir."; }
+            else if(girdi.includes("dünya")) { alan.innerHTML = "<b>Dünya:</b> Güneş sistemindeki yaşamın olduğu tek gezegendir."; }
+            else { alan.innerHTML = "Asistan: '" + girdi + "' hakkında bilgim yok, butonları kullanabilirsin."; }
         }
     </script>
 </body>
 </html>
+
 
 
 
