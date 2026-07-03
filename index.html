@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yusuf'un Portalı</title>
+    <style>
+        body { background: #0f172a; color: #f8fafc; font-family: 'Segoe UI', sans-serif; display: flex; flex-direction: column; align-items: center; min-height: 100vh; margin: 0; padding: 20px; }
+        h1 { margin-bottom: 30px; color: #38bdf8; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; width: 100%; max-width: 800px; }
+        .card { background: #1e293b; padding: 20px; border-radius: 15px; text-align: center; transition: 0.3s; cursor: pointer; border: 1px solid #334155; text-decoration: none; color: white; }
+        .card:hover { transform: translateY(-10px); border-color: #38bdf8; background: #334155; }
+        .card h2 { margin-top: 0; color: #38bdf8; }
+    </style>
+</head>
+<body>
+
+    <h1>Yusuf'un Projeleri</h1>
+    
+    <div class="grid">
+        <a href="asistan.html" class="card">
+            <h2>🤖 Asistan</h2>
+            <p>Sohbet et ve hesaplamalar yap.</p>
+        </a>
+        <a href="oyunlar.html" class="card">
+            <h2>🎮 Oyunlar</h2>
+            <p>Araba yarışı ve tahmin oyunları.</p>
+        </a>
+    </div>
+
+</body>
+</html>
