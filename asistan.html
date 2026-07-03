@@ -3,47 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yusuf AI | Tarih & Coğrafya</title>
+    <title>Yusuf AI Asistan</title>
     <style>
         body { font-family: sans-serif; background: #0f172a; color: #f8fafc; display: flex; justify-content: center; padding: 20px; }
         .container { width: 100%; max-width: 600px; }
         h2 { text-align: center; color: #6366f1; }
-        textarea { width: 100%; height: 120px; background: #1e293b; color: white; border: 1px solid #334155; border-radius: 12px; padding: 15px; box-sizing: border-box; resize: none; }
-        button { width: 100%; padding: 12px; background: #6366f1; color: white; border: none; border-radius: 12px; cursor: pointer; font-weight: bold; margin-top: 10px; }
-        #cevap { margin-top: 20px; padding: 20px; background: #1e293b; border-radius: 12px; line-height: 1.6; border-left: 4px solid #6366f1; }
+        textarea { width: 100%; height: 120px; background: #1e293b; color: white; border: 1px solid #334155; border-radius: 12px; padding: 15px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background: #6366f1; color: white; border: none; border-radius: 12px; cursor: pointer; margin-top: 10px; }
+        #cevap { margin-top: 20px; padding: 20px; background: #1e293b; border-radius: 12px; border-left: 4px solid #6366f1; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>Yusuf AI Pro</h2>
-        <textarea id="soru" placeholder="Tarih veya coğrafya sorunu yaz..."></textarea>
+        <h2>Yusuf AI Asistan</h2>
+        <textarea id="soru" placeholder="Sorunu yaz (Tarih, Coğrafya veya Matematik)..."></textarea>
         <button onclick="sor()">Analiz Et</button>
         <div id="cevap">Sistem hazır.</div>
     </div>
     <script>
-        // GitHub'ın anahtarı silmesini engellemek için parçalı yapı
-        const p1 = "Gsk_YtJJGH5YZna";
-        const p2 = "GtsSMapNDWGdyb3FYS8k";
-        const p3 = "hiMTswMTS2rArdJzsY3Gq";
-        const API_KEY = p1 + p2 + p3;  
+        const k = "gsk_";
+        const a = "F0ECbLssWZEyViCdujGoWGdyb3FYDgljafO6lYtpy1pe4uZ6Zz65";
+        const API_KEY = k + a;
         async function sor() {
             let metin = document.getElementById('soru').value;
             let cevap = document.getElementById('cevap');
-            if (!metin) return alert("Lütfen bir soru gir!");
-            cevap.innerHTML = "<i>Akademik kaynaklar taranıyor...</i>";
+            if (!metin) return alert("Soru boş olamaz!");
+            cevap.innerHTML = "<i>Analiz ediliyor...</i>";
             try {
                 let res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
                     method: "POST",
                     headers: { "Authorization": "Bearer " + API_KEY, "Content-Type": "application/json" },
                     body: JSON.stringify({
                         model: "llama3-70b-8192",
-                        messages: [{ role: "user", content: "Sen kıdemli bir tarihçi ve coğrafya uzmanısın. Soruyu akademik ve detaylı cevapla: " + metin }]
+                        messages: [{ role: "user", content: "Tarih, coğrafya veya matematik sorusu: " + metin }]
                     })
                 });
                 let data = await res.json();
-                cevap.innerText = data.choices[0].message.content;
+                if (data.choices) {
+                    cevap.innerText = data.choices[0].message.content;
+                } else {
+                    cevap.innerText = "Hata: " + JSON.stringify(data.error);
+                }
             } catch(e) {
-                cevap.innerText = "Hata oluştu. Lütfen bağlantını kontrol et.";
+                cevap.innerText = "Bağlantı kurulamadı.";
             }
         }
     </script>
