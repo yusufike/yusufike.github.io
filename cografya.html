@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Coğrafya ve Tarih Portalı</title>
+    <style>
+        body { background: #0a0a0c; color: white; font-family: sans-serif; display: flex; justify-content: center; padding: 20px; }
+        .container { background: #15151b; border: 2px solid #332d4a; border-radius: 20px; padding: 25px; width: 100%; max-width: 500px; }
+        .back-btn { color: #8e8e9e; text-decoration: none; font-size: 14px; }
+        .info-box { background: #1a1a23; padding: 15px; border-radius: 10px; margin: 15px 0; border: 1px solid #332d4a; min-height: 100px; color: #38bdf8; }
+        button { background: #7c3aed; border: none; padding: 10px; margin: 5px; border-radius: 5px; color: white; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <a href="asistan.html" class="back-btn">← Asistana Dön</a>
+    <h2>Coğrafya & Tarih</h2>
+    
+    <div>
+        <button onclick="goster('padisah')">17 Padişah</button>
+        <button onclick="goster('savas')">15 Savaş</button>
+        <button onclick="goster('kahraman')">10 Kahraman</button>
+        <button onclick="goster('kultur')">10 Ülke Kültürü</button>
+    </div>
+
+    <div class="info-box" id="bilgiEkrani">Bir kategori seç ve bilgileri görüntüle.</div>
+</div>
+
+<script>
+    const data = {
+        padisah
+  
