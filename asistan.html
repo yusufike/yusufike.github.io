@@ -1,55 +1,37 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <title>Yusuf'un Asistanı</title>
-    <style>
-        body { background: #0a0a0c; color: white; font-family: sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
-        .container { background: #15151b; border: 2px solid #332d4a; border-radius: 20px; padding: 25px; width: 90%; max-width: 400px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        h2 { color: #fff; margin-bottom: 20px; }
-        input { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 10px; border: none; background: #222; color: white; box-sizing: border-box; }
-        .mor-btn { width: 100%; padding: 12px; border-radius: 10px; border: none; background: #7c3aed; color: white; font-weight: bold; cursor: pointer; }
-        .cevap-alani { background: #1a1a23; padding: 15px; border-radius: 10px; margin-bottom: 15px; color: #38bdf8; font-weight: bold; border: 1px solid #332d4a; }
-        .menu { margin-top: 20px; border-top: 1px solid #333; padding-top: 15px; text-align: center; }
-        .back-btn { color: #8e8e9e; text-decoration: none; font-size: 14px; display: inline-block; margin-bottom: 15px; }
-    </style>
-    
+<meta charset="UTF-8">
+<title>Yusuf AI</title>
+<style>
+body{background:#0a0a0c;color:#fff;font-family:sans-serif;padding:20px;}
+.panel{background:#1a1a1a;padding:20px;border-radius:15px;max-width:400px;margin:auto;}
+input,button{width:100%;padding:10px;margin:5px 0;}
+</style>
 </head>
 <body>
-
-    <div class="container">
-        <a href="index.html" class="back-btn">← Geri Dön</a>
-        <h2>Asistan</h2>
-
-        <div class="cevap-alani" id="asistanCevap">Selam Yusuf! Ne yapalım?</div>
-
-        <input type="text" id="asistanInput" placeholder="Bir şeyler yaz...">
-        <button class="mor-btn" onclick="cevapVer()">Gönder</button>
-
-        <div class="menu">
-            <p style="color: #8e8e9e; font-size: 12px; margin-bottom: 10px;">Diğer Modüller:</p>
-            <a href="matematik.html" style="color: #7c3aed; text-decoration: none; margin-right: 15px;">Matematik</a>
-            <a href="cografya.html" style="color: #7c3aed; text-decoration: none;">Coğrafya</a>
-        </div>
-    </div>
-
-    <script>
-    function cevapVer() {
-        let girdi = document.getElementById('asistanInput').value.toLowerCase();
-        let cevapAlani = document.getElementById('asistanCevap');
-        if (girdi.includes("matematik") || girdi.includes("hesap") || girdi.includes("sayı")) {
-            cevapAlani.innerHTML = "Matematik modülüne gitmelisin: <a href='matematik.html' style='color:#38bdf8;'>Matematik Sayfası</a>";
-        } 
-        else if (girdi.includes("coğrafya") || girdi.includes("tarih") || girdi.includes("padişah") || girdi.includes("ülke") || girdi.includes("kahraman")) {
-            cevapAlani.innerHTML = "Tarih/Coğrafya bilgileri için buraya tıkla: <a href='cografya.html' style='color:#38bdf8;'>Coğrafya Sayfası</a>";
-        }
-        else {
-            cevapAlani.innerText = "Asistan: Seni dinliyorum Yusuf, sana nasıl yardımcı olabilirim?";
-        }
-        document.getElementById('asistanInput').value = "";
-    }
-    </script>
+<div class="panel">
+<div id="cevap">Merhaba!</div>
+<input type="text" id="girdi">
+<button onclick="sor()">Gönder</button>
+</div>
+<script>
+async function sor() {
+const key = "AQ.Ab8RN6JD6VVg4WCi7fk8nz2mrMjn53iVktNv5gTSJizIU-rFRg";
+const txt = document.getElementById('girdi').value;
+const div = document.getElementById('cevap');
+div.innerText = "Yükleniyor...";
+const url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + key;
+const res = await fetch(url, {
+method: "POST",
+headers: {"Content-Type": "application/json"},
+body: JSON.stringify({contents: [{parts: [{text: txt}]}]})
+});
+const data = await res.json();
+const msg = data.candidates[0].content.parts[0].text;
+div.innerText = msg;
+window.speechSynthesis.speak(new SpeechSynthesisUtterance(msg));
+}
+</script>
 </body>
 </html>
-
-
