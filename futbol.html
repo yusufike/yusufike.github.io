@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Futbol Oyunu</title>
+    <style>
+        body { background: #0a0a0c; color: white; text-align: center; font-family: sans-serif; }
+        #sahne { position: relative; width: 500px; height: 250px; border: 3px solid #38bdf8; margin: 20px auto; background: #064e3b; }
+        
+        /* Oyuncu Karakteri (Asistan Yönetiyor) */
+        #oyuncu { position: absolute; bottom: 100px; left: 20px; width: 40px; height: 40px; background: #a855f7; border-radius: 5px; transition: 0.3s; }
+        
+        /* Kale */
+        #kale { position: absolute; top: 75px; right: 10px; width: 15px; height: 100px; background: white; }
+        
+        /* Top (Dünkü gibi) */
+        #top { position: absolute; bottom: 110px; left: 60px; width: 20px; height: 20px; background: white; border-radius: 50%; transition: 1s; }
+    </style>
+</head>
+<body>
+    <h2>⚽ Asistan Kontrollü Futbol</h2>
+    <div id="sahne">
+        <div id="oyuncu"></div> <div id="kale"></div>  <div id="top"></div>   </div><div id="golYazisi" style="display:none; position:absolute; top:80px; left:150px; font-size:40px; color:yellow; font-weight:bold; text-shadow: 2px 2px #000;">GOL!</div>
+    <button onclick="asistanSutCek()">Şut Çek (Asistan Komutuyla)</button
+    <script>
+        function asistanSutCek() {
+            let top = document.getElementById('top');
+            let oyuncu = document.getElementById('oyuncu');
+            
+            // Asistan oyuncuyu topa yaklaştırır
+            oyuncu.style.left = "50px"; 
+            // Topun hareketi
+            setTimeout(() => {
+                top.style.left = "470px"; // Top kaleye gidiyor
+                top.style.bottom = "120px"; // Hafif havadan kavis
+            }, 500);
+            setTimeout(() => {
+                alert("Asistan: GOOOOL! Harika bir vuruştu Yusuf!");
+            }, 1500);
+        }
+    </script>
+</body>
+</html>
