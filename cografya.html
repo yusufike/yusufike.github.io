@@ -2,63 +2,40 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>Coğrafya & Tarih Asistanı</title>
+    <title>Tarih & Coğrafya Uzmanı</title>
     <style>
-        body { background: #0a0a0c; color: white; font-family: sans-serif; padding: 20px; }
-        .menu { margin-top: 20px; }
-        button { padding: 10px; margin: 5px; cursor: pointer; background: #7c3aed; color: white; border: none; border-radius: 5px; }
-        #cevapAlani { margin-top: 20px; padding: 15px; border: 1px solid #332d4a; border-radius: 10px; min-height: 200px; background: #1a1a23; }
-        input { padding: 10px; width: 60%; border-radius: 5px; border: none; }
+        body { background-color: #2c3e50; color: white; padding: 20px; font-family: sans-serif; }
+        #cevap { margin-top: 20px; padding: 15px; border-radius: 10px; background-color: #34495e; min-height: 50px; }
     </style>
 </head>
 <body>
-    <h2>Coğrafya & Tarih Asistanı</h2>
-    <input type="text" id="tarihInput" placeholder="Savaş, Padişah veya Kahraman yaz...">
-    <button onclick="cevapVer()">Ara</button>
-
-    <div class="menu">
-        <button onclick="goster('kahramanlar')">🏆 10 Kahraman</button>
-        <button onclick="goster('savaslar')">⚔️ 15 Savaş</button>
-        <button onclick="goster('padisahlar')">👑 17 Padişah</button>
-        <button onclick="goster('kulturlar')">🌍 10 Kültür</button>
-    </div>
-    <div id="cevapAlani">Kategorilere bas veya arama yap.</div>
+    <h2>🌍 Tarih ve Coğrafya Portalı</h2>
+    <input type="text" id="soru" placeholder="Tarih veya Coğrafya sorunu yaz..." style="width: 80%; padding: 10px;">
+    <button onclick="sor()">Cevabı Bul</button>
+    <div id="cevap">Soru bekliyorum...</div>
     <script>
-        function goster(tur) {
-            let alan = document.getElementById('cevapAlani');
-            if(tur == 'kahramanlar') {
-                alan.innerHTML = "<h3>🏆 10 Büyük Kahraman</h3><ul><li>Alparslan</li><li>Fatih Sultan Mehmet</li><li>Atatürk</li><li>Seyit Onbaşı</li><li>Barbaros</li><li>Mete Han</li><li>Tomris Hatun</li><li>Ulubatlı Hasan</li><li>Nene Hatun</li><li>Ömer Halisdemir</li></ul>";
-            } else if(tur == 'savaslar') {
-                alan.innerHTML = "<h3>⚔️ 15 Önemli Savaş</h3><ul><li>Malazgirt</li><li>Kösedağ</li><li>Kosova</li><li>Niğbolu</li><li>Ankara</li><li>Varna</li><li>İstanbul Fethi</li><li>Otlukbeli</li><li>Çaldıran</li><li>Mercidabık</li><li>Ridaniye</li><li>Mohaç</li><li>Preveze</li><li>Çanakkale</li><li>Kurtuluş Savaşı</li></ul>";
-            } else if(tur == 'padisahlar') {
-                alan.innerHTML = "<h3>👑 17 Önemli Padişah</h3><ul><li>Osman Gazi</li><li>Orhan Gazi</li><li>I. Murad</li><li>Yıldırım Bayezid</li><li>Çelebi Mehmed</li><li>II. Murad</li><li>Fatih Sultan Mehmet</li><li>II. Bayezid</li><li>Yavuz Sultan Selim</li><li>Kanuni</li><li>II. Selim</li><li>III. Murad</li><li>III. Mehmed</li><li>I. Ahmed</li><li>IV. Murad</li><li>III. Mustafa</li><li>II. Mahmud</li></ul>";
-            } else if(tur == 'kulturlar') {
-                alan.innerHTML = "<h3>🌍 10 Ülke Kültürü</h3><ul><li>Türk: Misafirperverlik</li><li>Japon: Disiplin</li><li>İtalyan: Sanat</li><li>Fransız: Gastronomi</li><li>Çin: Gelenek</li><li>Hint: Festivaller</li><li>Mısır: Tarih</li><li>Brezilya: Dans</li><li>İspanyol: Flamenco</li><li>Alman: Mühendislik</li></ul>";
+        async function sor() {
+            const API_KEY = "AQ.Ab8RN6Iy5ksk2M0LgfFVGdrp14Aw4RGFerNWw4QUzHtNwJYn8A";
+            let metin = document.getElementById('soru').value;
+            let cevap = document.getElementById('cevap');
+            // Asistanın her iki alanda da uzman olmasını sağlayan talimat
+            let sistemTalimati = "Sen hem uzman bir tarihçi hem de uzman bir coğrafyacısın. " +
+                                "Sana sorulan konu tarihe mi yoksa coğrafyaya mı ait analiz et " +
+                                "ve o alanın terminolojisini kullanarak derinlemesine, akademik bir cevap ver.";
+            cevap.innerText = "Analiz ediliyor...";
+
+            try {
+                let res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ contents: [{ parts: [{ text: sistemTalimati + " Soru: " + metin }] }] })
+                });
+                let data = await res.json();
+                cevap.innerText = data.candidates[0].content.parts[0].text;
+            } catch(e) {
+                cevap.innerText = "Hata oluştu: " + e.message;
             }
-        }
-        function cevapVer() {
-            let girdi = document.getElementById('tarihInput').value.toLowerCase();
-            let alan = document.getElementById('cevapAlani');
-            if(girdi.includes("kahraman")) { goster('kahramanlar'); }
-            else if(girdi.includes("savaş")) { goster('savaslar'); }
-            else if(girdi.includes("padişah")) { goster('padisahlar'); }
-            else if(girdi.includes("kültür")) { goster('kulturlar'); }
-            else if(girdi.includes("malazgirt")) { alan.innerHTML = "<b>Malazgirt (1071):</b> Anadolu'nun kapılarını Türklere açan zafer."; }
-            else if(girdi.includes("fatih")) { alan.innerHTML = "<b>Fatih Sultan Mehmet:</b> İstanbul'u fetheden 7. Osmanlı Padişahıdır."; }
-            else if(girdi.includes("türkiye")) { alan.innerHTML = "<b>Türkiye:</b> Asya ve Avrupa'yı bağlayan jeopolitik önemi yüksek bir ülkedir."; }
-            else if(girdi.includes("izmir")) { alan.innerHTML = "<b>İzmir:</b> Ege'nin incisi, modern ve köklü bir liman kentidir."; }
-            else if(girdi.includes("dünya")) { alan.innerHTML = "<b>Dünya:</b> Güneş sistemindeki yaşamın olduğu tek gezegendir."; }
-            else { alan.innerHTML = "Asistan: '" + girdi + "' hakkında bilgim yok, butonları kullanabilirsin."; }
         }
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-  
