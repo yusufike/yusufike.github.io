@@ -2,38 +2,47 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>Yusuf Asistan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yusuf AI | Tarih & Coğrafya</title>
+    <style>
+        body { font-family: sans-serif; background: #0f172a; color: #f8fafc; display: flex; justify-content: center; padding: 20px; }
+        .container { width: 100%; max-width: 600px; }
+        h2 { text-align: center; color: #6366f1; }
+        textarea { width: 100%; height: 120px; background: #1e293b; color: white; border: 1px solid #334155; border-radius: 12px; padding: 15px; box-sizing: border-box; resize: none; }
+        button { width: 100%; padding: 12px; background: #6366f1; color: white; border: none; border-radius: 12px; cursor: pointer; font-weight: bold; margin-top: 10px; }
+        #cevap { margin-top: 20px; padding: 20px; background: #1e293b; border-radius: 12px; line-height: 1.6; border-left: 4px solid #6366f1; }
+    </style>
 </head>
 <body>
-    <h2>Yusuf AI</h2>
-    <input type="text" id="input" placeholder="Soru sor...">
-    <button onclick="calistir()">Gönder</button>
-    <div id="cevap"></div>
+    <div class="container">
+        <h2>Yusuf AI Pro</h2>
+        <textarea id="soru" placeholder="Tarih veya coğrafya sorunu yaz..."></textarea>
+        <button onclick="sor()">Analiz Et</button>
+        <div id="cevap">Sistem hazır.</div>
+    </div>
     <script>
-        async function calistir() {
-            const API_KEY = "AQ.Ab8RN6Iy5ksk2M0LgfFVGdrp14Aw4RGFerNWw4QUzHtNwJYn8A";
-            let input = document.getElementById('input').value;
+        const API_KEY = "Gsk_YtJJGH5YZnaGtsSMapNDWGdyb3FYS8khiMTswMTS2rArdJzsY3Gq";
+        async function sor() {
+            let metin = document.getElementById('soru').value;
             let cevap = document.getElementById('cevap');
-            cevap.innerText = "Bekle, istek gönderiliyor...";  
-            // Proxy ile Google'a bağlanıyoruz
-            let targetUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + API_KEY;
-            let url = "https://api.allorigins.win/get?url=" + encodeURIComponent(targetUrl);
+            if (!metin) return alert("Lütfen bir soru gir!");
+            cevap.innerHTML = "<i>Akademik kaynaklar taranıyor...</i>";
             try {
-                let response = await fetch(targetUrl, { // Proxy bazen POST isteklerini bozduğu için doğrudan burayı deniyoruz
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({ contents: [{ parts: [{ text: input }] }] })
+                let res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+                    method: "POST",
+                    headers: { "Authorization": "Bearer " + API_KEY, "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        model: "llama3-70b-8192",
+                        messages: [{ role: "user", content: "Sen kıdemli bir tarihçi ve coğrafya uzmanısın. Soruyu akademik ve detaylı cevapla: " + metin }]
+                    })
                 });
-                let data = await response.json();
-                if(data.candidates) {
-                    cevap.innerText = data.candidates[0].content.parts[0].text;
-                } else {
-                    cevap.innerText = "Hata oluştu: " + JSON.stringify(data);
-                }
-            } catch (e) {
-                cevap.innerText = "Bağlantı Hatası: " + e.message;
+                let data = await res.json();
+                cevap.innerText = data.choices[0].message.content;
+            } catch(e) {
+                cevap.innerText = "Hata oluştu. Lütfen bağlantını kontrol et.";
             }
         }
     </script>
 </body>
 </html>
+
