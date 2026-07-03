@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Yusuf'un Portalı</title>
+    <style>
+        body { background: #0a0a0c; color: white; font-family: sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .container { background: #15151b; border: 2px solid #332d4a; border-radius: 20px; padding: 25px; width: 90%; max-width: 400px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .ekran { display: none; }
+        #menu { display: block; }
+        h2 { color: #fff; margin-bottom: 20px; }
+        .btn { display: block; width: 100%; padding: 15px; margin: 10px 0; background: #22222d; border: 1px solid #444; color: white; border-radius: 12px; cursor: pointer; text-align: center; }
+        .btn:hover { background: #333345; }
+        .back-btn { color: #8e8e9e; cursor: pointer; margin-bottom: 15px; display: inline-block; font-size: 14px; }
+        
+        /* Asistan'a özel stil */
+        input { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 10px; border: none; background: #222; color: white; box-sizing: border-box; }
+        .mor-btn { width: 100%; padding: 12px; border-radius: 10px; border: none; background: #7c3aed; color: white; font-weight: bold; cursor: pointer; }
+        .cevap-alani { background: #1a1a23; padding: 15px; border-radius: 10px; margin-top: 15px; text-align: left; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- ANA MENÜ -->
+        <div id="menu" class="ekran" style="display:block;">
+            <h2>Yusuf'un Dünyası</h2>
+            <div class="btn" onclick="goster('asistan-ekran')">🤖 Asistan</div>
+            <div class="btn" onclick="goster('yaris-ekran')">🏎️ Yarış</div>
+            <div class="btn" onclick="goster('futbol-ekran')">⚽ Futbol</div>
+            <div class="btn" onclick="goster('tahmin-ekran')">🎯 Sayı Tahmin</div>
+        </div>
+
+        <!-- ASİSTAN (Gönder Butonlu) -->
+        <div id="asistan-ekran" class="ekran">
+            <div class="back-btn" onclick="goster('menu')">← Geri</div>
+            <h2>Asistan</h2>
+            <input type="text" id="asistanInput" placeholder="Bir şeyler yaz...">
+            <button class="mor-btn" onclick="cevapVer()">Gönder</button>
+            <div class="cevap-alani" id="asistanCevap">Asistan: Seni dinliyorum...</div>
+        </div>
+
+        <!-- OYUNLAR (Gönder butonu yok, kendi oyun kodlarını buraya ekleyeceksin) -->
+        <div id="yaris-ekran" class="ekran">
+            <div class="back-btn" onclick="goster('menu')">← Geri</div>
+            <h2>Yarış Ekranı</h2>
+            <p>Buraya kendi yarış kodlarını yerleştirebilirsin.</p>
+        </div>
+
+        <div id="futbol-ekran" class="ekran">
+            <div class="back-btn" onclick="goster('menu')">← Geri</div>
+            <h2>Futbol Ekranı</h2>
+            <p>Buraya kendi futbol kodlarını yerleştirebilirsin.</p>
+        </div>
+
+        <div id="tahmin-ekran" class="ekran">
+            <div class="back-btn" onclick="goster('menu')">← Geri</div>
+            <h2>Sayı Tahmin Ekranı</h2>
+            <p>Buraya kendi tahmin kodlarını yerleştirebilirsin.</p>
+        </div>
+    </div>
+
+    <script>
+        function goster(id) {
+            document.querySelectorAll('.ekran').forEach(e => e.style.display = 'none');
+            document.getElementById(id).style.display = 'block';
+        }
+        function cevapVer() {
+            let giris = document.getElementById('asistanInput').value;
+            document.getElementById('asistanCevap').innerText = "Asistan: " + giris + " konusunu henüz bilmiyorum.";
+        }
+    </script>
+</body>
+</html>
