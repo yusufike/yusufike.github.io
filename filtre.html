@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Tarih Filtreleme</title>
+    <style>
+        body { background: #0f172a; color: white; font-family: sans-serif; margin: 0; padding: 20px; }
+        .header { display: flex; justify-content: space-between; font-weight: bold; color: #818cf8; margin-bottom: 20px; }
+        .filtre-menu { display: flex; gap: 10px; justify-content: center; margin-bottom: 30px; }
+        button { padding: 10px 20px; cursor: pointer; background: #334155; color: white; border: none; border-radius: 5px; }
+        button:hover { background: #4f46e5; }
+        #sonucAlani { background: #1e293b; padding: 20px; border-radius: 10px; min-height: 300px; }
+        .kart { border: 1px solid #334155; padding: 15px; margin-bottom: 10px; border-radius: 8px; background: #0f172a; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div id="tarih"></div>
+        <div id="zaman"></div>
+    </div>
+
+    <h2 style="text-align:center;">Tarihsel Dönemler</h2>
+    <div class="filtre-menu">
+        <button onclick="filtrele('kurulus')">Kuruluş</button>
+        <button onclick="filtrele('yukselme')">Yükselme</button>
+        <button onclick="filtrele('duraklama')">Duraklama</button>
+    </div>
+
+    <div id="sonucAlani">Bir dönem seçerek detaylı olayları incele.</div>
+
+    <script>
+        // Zaman ve Tarih Güncelleme
+        function guncelle() {
+            const simdi = new Date();
+            document.getElementById('tarih').innerText = simdi.toLocaleDateString('tr-TR');
+            document.getElementById('zaman').innerText = simdi.toLocaleTimeString('tr-TR');
+        }
+        setInterval(guncelle, 1000);
+        guncelle();
+
+        // Filtreleme Mantığı
+        function filtrele(donem) {
+            let alan = document.getElementById('sonucAlani');
+            let icerik = "";
+
+            if(donem == 'kurulus') {
+                icerik = "<div class='kart'><b>Osman Gazi:</b> Devletin temellerini attı.</div>" +
+                         "<div class='kart'><b>Malazgirt:</b> Anadolu'ya girişin başlangıcı.</div>";
+            } else if(donem == 'yukselme') {
+                icerik = "<div class='kart'><b>Fatih Sultan Mehmet:</b> İstanbul'u fethederek çağ açtı.</div>" +
+                         "<div class='kart'><b>Kanuni Sultan Süleyman:</b> En geniş sınırlara ulaşıldı.</div>";
+            } else if(donem == 'duraklama') {
+                icerik = "<div class='kart'><b>IV. Murad:</b> Otoriteyi yeniden tesis etmeye çalıştı.</div>";
+            }
+            alan.innerHTML = icerik;
+        }
+    </script>
+</body>
+</html>
