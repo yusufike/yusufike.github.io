@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yusuf'un Asistanı</title>
+    <style>
+        body { background: #0a0a0c; color: white; font-family: sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .container { background: #15151b; border: 2px solid #332d4a; border-radius: 20px; padding: 25px; width: 90%; max-width: 400px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        h2 { color: #fff; margin-bottom: 20px; }
+        input { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 10px; border: none; background: #222; color: white; box-sizing: border-box; }
+        .mor-btn { width: 100%; padding: 12px; border-radius: 10px; border: none; background: #7c3aed; color: white; font-weight: bold; cursor: pointer; }
+        .mor-btn:hover { background: #6d28d9; }
+        .cevap-alani { background: #1a1a23; padding: 15px; border-radius: 10px; margin-top: 15px; text-align: left; font-size: 14px; min-height: 50px; }
+        .back-btn { color: #8e8e9e; text-decoration: none; font-size: 14px; display: inline-block; margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <a href="giris.html" class="back-btn">← Geri Dön</a>
+        <h2>Asistan</h2>
+        <input type="text" id="asistanInput" placeholder="Bir şeyler yaz...">
+        <button class="mor-btn" onclick="cevapVer()">Gönder</button>
+        <div class="cevap-alani" id="asistanCevap">Asistan: Selam Yusuf! Günün nasıl geçiyor?</div>
+    </div>
+<div style="margin-top: 20px; border-top: 1px solid #333; padding-top: 15px;">
+    <p style="color: #8e8e9e; font-size: 12px; margin-bottom: 10px;">Daha fazlasına geç:</p>
+    <div style="display: flex; gap: 10px; justify-content: center;">
+        <a href="matematik.html" style="color: #7c3aed; text-decoration: none; font-size: 14px;">Matematik</a>
+        <a href="cografya.html" style="color: #7c3aed; text-decoration: none; font-size: 14px;">Coğrafya</a>
+    </div>
+</div>
+  
+    <script>
+        function cevapVer() {
+            let girdi = document.getElementById('asistanInput').value.toLowerCase();
+            let cevapAlani = document.getElementById('asistanCevap');
+            let yanit = "";
+
+            if (girdi.includes("selam") || girdi.includes("merhaba")) {
+                yanit = "Merhaba! Bugün seninle neler yapabiliriz? Günün nasıl geçiyor?";
+            } else if (girdi.includes("nasılsın") || girdi.includes("naber")) {
+                yanit = "Harikayım, seninle kod yazmak çok keyifli! Senin keyfin nasıl?";
+            } else if (girdi.includes("kod") || girdi.includes("proje")) {
+                yanit = "Kodlarınla ilgilenmek harika bir fikir! Takıldığın bir yer var mı?";
+            } else if (girdi.includes("iyiyim") || girdi.includes("güzel")) {
+                yanit = "Bunu duyduğuma çok sevindim! Bugün senin için ne yapabilirim?";
+            } else {
+                yanit = "Anlıyorum... Bunu biraz daha açar mısın? Seni dinliyorum.";
+            }
+
+            cevapAlani.innerText = "Asistan: " + yanit;
+            document.getElementById('asistanInput').value = "";
+        }
+    </script>
+</body>
+</html>
