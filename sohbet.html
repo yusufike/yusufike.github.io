@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Sohbet Paneli</title>
+    <style>
+        body { background: #0f172a; color: white; font-family: 'Segoe UI', sans-serif; display: flex; flex-direction: column; align-items: center; padding: 20px; }
+        #sohbetEkranı { width: 90%; max-width: 500px; height: 400px; background: #1e293b; border-radius: 10px; padding: 15px; overflow-y: auto; margin-bottom: 10px; border: 1px solid #334155; }
+        .input-alanı { width: 90%; max-width: 500px; display: flex; gap: 10px; }
+        input { flex: 1; padding: 12px; border-radius: 5px; border: none; background: #334155; color: white; }
+        button { padding: 10px 20px; background: #4f46e5; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #6366f1; }
+    </style>
+</head>
+<body>
+
+    <div id="sohbetEkranı"></div>
+
+    <div class="input-alanı">
+        <input type="text" id="mesajGirdisi" placeholder="Mesajını yaz...">
+        <button onclick="gonder()">Gönder</button>
+    </div>
+
+    <script>
+        const sorularVeCevaplar = [
+            { soru: "selam", cevap: "Aleykümselam, günün nasıl geçiyor, bir sorun var mı?" },
+            { soru: "merhaba", cevap: "Merhaba, günün nasıl geçiyor?" },
+            { soru: "iyi", cevap: "İyi olduğuna sevindim, yapabileceğim bir şey var mı?" },
+            { soru: "matematik", cevap: "Matematik soruları için matematik bölümüne bakabilirsin." },
+            { soru: "fatih sultan mehmet", cevap: "Bu bilgiyi Coğrafya/Tarih bölümünden öğrenebilirsin." },
+            { soru: "cografya", cevap: "Coğrafya soruları için ilgili bölümü kontrol edebilirsin." }
+        ];
+
+        function gonder() {
+            let girdi = document.getElementById('mesajGirdisi');
+            let ekran = document.getElementById('sohbetEkranı');
+            let msg = girdi.value.toLowerCase();
+            
+            if (girdi.value.trim() !== "") {
+                ekran.innerHTML += "<p><b>Sen:</b> " + girdi.value + "</p>";
+                
+                let bulunan = sorularVeCevaplar.find(item => msg.includes(item.soru));
+                
+                if (bulunan) {
+                    ekran.innerHTML += "<p><b>Asistan:</b> " + bulunan.cevap + "</p>";
+                } 
+                else if (msg.includes("kötü") || msg.includes("idare eder") || msg.includes("sorun var")) {
+                    ekran.innerHTML += "<p><b>Asistan:</b> Kötü olmuş, noldu? Bir sorun mu var, anlatabilirsin...</p>";
+                }
+                else if (msg.includes("güzel") || msg.includes("çok iyi")) {
+                    ekran.innerHTML += "<p><b>Asistan:</b> Senin adına çok sevindim, başka sorun var mı?</p>";
+                }
+                else {
+                    ekran.innerHTML += "<p><b>Asistan:</b> Henüz yapım aşamasındayım. Geliştiricim Yusuf'a (TikTok: neoxi31) ulaşarak bana yeni özellikler eklemesini sağlayabilirsin.</p>";
+                }
+                
+                girdi.value = "";
+                ekran.scrollTop = ekran.scrollHeight;
+            }
+        }
+    </script>
+</body>
+</html>
+
+      
