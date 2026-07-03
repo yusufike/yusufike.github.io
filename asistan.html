@@ -13,6 +13,7 @@
         .menu { margin-top: 20px; border-top: 1px solid #333; padding-top: 15px; text-align: center; }
         .back-btn { color: #8e8e9e; text-decoration: none; font-size: 14px; display: inline-block; margin-bottom: 15px; }
     </style>
+    
 </head>
 <body>
 
@@ -33,17 +34,20 @@
     </div>
 
     <script>
-        function cevapVer() {
-            let girdi = document.getElementById('asistanInput').value.toLowerCase();
-            let cevapAlani = document.getElementById('asistanCevap');
-            let yanit = "Anlıyorum... Bunu biraz daha açar mısın? Seni dinliyorum.";
-            
-            if (girdi.includes("selam")) yanit = "Merhaba Yusuf! Bugün nasıl gidiyor?";
-            else if (girdi.includes("nasılsın")) yanit = "Harikayım, seninle kod yazmak çok keyifli!";
-            
-            cevapAlani.innerText = "Asistan: " + yanit;
-            document.getElementById('asistanInput').value = ""; // Kutuyu temizle
+    function cevapVer() {
+        let girdi = document.getElementById('asistanInput').value.toLowerCase();
+        let cevapAlani = document.getElementById('asistanCevap');
+        if (girdi.includes("matematik") || girdi.includes("hesap") || girdi.includes("sayı")) {
+            cevapAlani.innerHTML = "Matematik modülüne gitmelisin: <a href='matematik.html' style='color:#38bdf8;'>Matematik Sayfası</a>";
+        } 
+        else if (girdi.includes("coğrafya") || girdi.includes("tarih") || girdi.includes("padişah") || girdi.includes("ülke") || girdi.includes("kahraman")) {
+            cevapAlani.innerHTML = "Tarih/Coğrafya bilgileri için buraya tıkla: <a href='cografya.html' style='color:#38bdf8;'>Coğrafya Sayfası</a>";
         }
+        else {
+            cevapAlani.innerText = "Asistan: Seni dinliyorum Yusuf, sana nasıl yardımcı olabilirim?";
+        }
+        document.getElementById('asistanInput').value = "";
+    }
     </script>
 </body>
 </html>
