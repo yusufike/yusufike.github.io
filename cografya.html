@@ -2,32 +2,76 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>Coğrafya ve Tarih Portalı</title>
+    <title>Coğrafya & Tarih</title>
     <style>
-        body { background: #0a0a0c; color: white; font-family: sans-serif; display: flex; justify-content: center; padding: 20px; }
-        .container { background: #15151b; border: 2px solid #332d4a; border-radius: 20px; padding: 25px; width: 100%; max-width: 500px; }
-        .back-btn { color: #8e8e9e; text-decoration: none; font-size: 14px; }
-        .info-box { background: #1a1a23; padding: 15px; border-radius: 10px; margin: 15px 0; border: 1px solid #332d4a; min-height: 100px; color: #38bdf8; }
-        button { background: #7c3aed; border: none; padding: 10px; margin: 5px; border-radius: 5px; color: white; cursor: pointer; }
+        body { background: #0a0a0c; color: white; font-family: sans-serif; padding: 20px; }
+        .menu { margin-top: 20px; }
+        button { padding: 10px; margin: 5px; cursor: pointer; background: #7c3aed; color: white; border: none; border-radius: 5px; }
+        #cevapAlani { margin-top: 20px; padding: 15px; border: 1px solid #332d4a; border-radius: 10px; min-height: 150px; background: #1a1a23; }
+        input { padding: 10px; width: 60%; border-radius: 5px; border: none; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <a href="asistan.html" class="back-btn">← Asistana Dön</a>
     <h2>Coğrafya & Tarih</h2>
     
-    <div>
-        <button onclick="goster('padisah')">17 Padişah</button>
-        <button onclick="goster('savas')">15 Savaş</button>
-        <button onclick="goster('kahraman')">10 Kahraman</button>
-        <button onclick="goster('kultur')">10 Ülke Kültürü</button>
+    <input type="text" id="tarihInput" placeholder="Fatih, Kahramanlar veya Savaşlar yaz...">
+    <button onclick="cevapVer()">Ara</button>
+
+    <div class="menu">
+        <button onclick="goster('kahramanlar')">🏆 10 Kahraman</button>
+        <button onclick="goster('savaslar')">⚔️ 15 Savaş</button>
+        <button onclick="goster('padisahlar')">👑 17 Padişah</button>
+        <button onclick="goster('kulturlar')">🌍 10 Ülke Kültürü</button>
     </div>
 
-    <div class="info-box" id="bilgiEkrani">Bir kategori seç ve bilgileri görüntüle.</div>
-</div>
+    <div id="cevapAlani">Bir kategori seç veya arama yap.</div>
 
-<script>
-    const data = {
-        padisah
+    <script>
+        function goster(tur) {
+            let alan = document.getElementById('cevapAlani');
+            if(tur == 'kahramanlar') {
+                alan.innerHTML = "<h3>🏆 10 Büyük Kahraman</h3><ul><li>Alparslan</li><li>Fatih Sultan Mehmet</li><li>Atatürk</li><li>Seyit Onbaşı</li><li>Barbaros Hayrettin Paşa</li><li>Mete Han</li><li>Tomris Hatun</li><li>Ulubatlı Hasan</li><li>Nene Hatun</li><li>Ömer Halisdemir</li></ul>";
+            } else if(tur == 'savaslar') {
+    alan.innerHTML = "<h3>⚔️ 15 Önemli Savaş</h3><ul>" +
+    "<li>Malazgirt Meydan Muharebesi</li><li>Kösedağ Savaşı</li><li>Kosova Savaşı</li><li>Niğbolu Savaşı</li>" +
+    "<li>Ankara Savaşı</li><li>Varna Savaşı</li><li>İstanbul'un Fethi</li><li>Otlukbeli Savaşı</li><li>Çaldıran Savaşı</li>" +
+    "<li>Mercidabık Savaşı</li><li>Ridaniye Savaşı</li><li>Mohaç Meydan Muharebesi</li><li>Preveze Deniz Zaferi</li><li>Çanakkale Savaşları</li><li>Kurtuluş Savaşı</li></ul>";
+            }
+                alan.innerHTML = "<h3>⚔️ 15 Büyük Savaş</h3><p>Tarihimizin dönüm noktası olan savaşlar listesi buraya eklenecek.</p>";
+            } else if(tur == 'padisahlar') {
+    alan.innerHTML = "<h3>👑 17 Önemli Osmanlı Padişahı</h3><ul>" +
+    "<li>Osman Gazi</li><li>Orhan Gazi</li><li>I. Murad</li><li>Yıldırım Bayezid</li><li>Çelebi Mehmed</li>" +
+    "<li>II. Murad</li><li>Fatih Sultan Mehmet</li><li>II. Bayezid</li><li>Yavuz Sultan Selim</li><li>Kanuni Sultan Süleyman</li>" +
+    "<li>II. Selim</li><li>III. Murad</li><li>III. Mehmed</li><li>I. Ahmed</li><li>IV. Murad</li><li>III. Mustafa</li><li>II. Mahmud</li></ul>";
+            }
+                alan.innerHTML = "<h3>👑 17 Padişah</h3><ul><li>1. Osman Gazi</li><li>2. Orhan Gazi</li><li>...diğerleri...</li></ul>";
+            } else if(tur == 'kulturlar') {
+    alan.innerHTML = "<h3>🌍 10 Ülke Kültürü</h3><ul>" +
+    "<li>Türk: Misafirperverlik</li><li>Japon: Disiplin</li><li>İtalyan: Sanat</li><li>Fransız: Gastronomi</li><li>Çin: Gelenek</li>" +
+    "<li>Hint: Renkli festivaller</li><li>Mısır: Tarihi miras</li><li>Brezilya: Dans ve eğlence</li><li>İspanyol: Flamenco</li><li>Alman: Mühendislik</li></ul>";
+            }
+                alan.innerHTML = "<h3>🌍 Dünya Kültürleri</h3><p>Seçkin 10 ülke kültürü incelemesi.</p>";
+            }
+        }
+            function cevapVer() {
+        let girdi = document.getElementById('tarihInput').value.toLowerCase();
+        let alan = document.getElementById('cevapAlani');
+        
+        if(girdi.includes("kahraman")) {
+            goster('kahramanlar');
+        } else if(girdi.includes("fatih")) {
+            alan.innerHTML = "<b>Fatih Sultan Mehmet:</b> 1432 Edirne doğumlu. İstanbul'u fetheden 7. Osmanlı Padişahıdır.";
+        } else if(girdi.includes("malazgirt")) {
+            alan.innerHTML = "<b>Malazgirt Meydan Muharebesi (1071):</b> Sultan Alparslan komutasındaki Selçuklu ordusunun Bizans'ı mağlup ederek Anadolu'nun kapılarını Türklere açtığı zaferdir.";
+        } else {
+            alan.innerHTML = "Asistan: '" + girdi + "' konusunda bilgim yok.";
+        }
+            }
+</body>
+</html>
+
+
+
+
   
