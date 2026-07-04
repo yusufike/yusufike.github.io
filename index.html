@@ -15,21 +15,18 @@
     </style>
 </head>
 <body>
-
 <div class="container">
     <h1>Yusuf AI Portalı</h1>
     <button onclick="oyunAc()">Sayı Tahmin Oyunu</button>
     <button onclick="hesapMakinesiAc()">Hesap Makinesi</button>
     <button onclick="hakkindaAc()">Hakkında</button>
-
+     <button onclick="window.location.href='cografya.html'">Bağlantı</button>
     <div id="app-box">
         <p>Bir modül seç ve kullanmaya başla!</p>
     </div>
 </div>
-
 <script>
     let appBox = document.getElementById('app-box');
-
     function oyunAc() {
         window.gizli = Math.floor(Math.random() * 100) + 1;
         appBox.innerHTML = "<h3>Sayı Tahmin (1-100)</h3>" +
@@ -37,7 +34,6 @@
             "<button onclick='tahminEt()'>Kontrol Et</button>" +
             "<p id='durum'></p>";
     }
-
     function tahminEt() {
         let t = document.getElementById('tahmin').value;
         let s = document.getElementById('durum');
@@ -45,14 +41,12 @@
         else if(t < window.gizli) s.innerHTML = "Daha BÜYÜK bir sayı gir.";
         else s.innerHTML = "Daha KÜÇÜK bir sayı gir.";
     }
-
     function hesapMakinesiAc() {
         appBox.innerHTML = "<h3>Hesap Makinesi</h3>" +
             "<input type='text' id='islem' placeholder='Örn: 50*2+10'>" +
             "<button onclick='hesapla()'>Hesapla</button>" +
             "<p id='sonuc'></p>";
     }
-
     function hesapla() {
         try {
             let res = eval(document.getElementById('islem').value);
@@ -61,11 +55,9 @@
             document.getElementById('sonuc').innerHTML = "Hatalı işlem!";
         }
     }
-
     function hakkindaAc() {
         appBox.innerHTML = "<h3>Hakkında</h3><p>Bu portal Yusuf tarafından tasarlandı. Tamamen çevrimdışı ve hızlıdır.</p>";
     }
 </script>
-
 </body>
 </html>
