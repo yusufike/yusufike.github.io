@@ -11,7 +11,21 @@
     </style>
 </head>
 <body>,
-<div class="container">
+<div class="container"><!-- Tarih ve Saat için özel bölme -->
+<div style="display: flex; justify-content: space-between; font-size: 14px; color: #94a3b8; margin-bottom: 20px;">
+    <div id="tarih"></div>
+    <div id="saat"></div>
+</div>
+<script>
+    function guncelle() {
+        let simdi = new Date();
+        document.getElementById('tarih').innerText = simdi.toLocaleDateString('tr-TR');
+        document.getElementById('saat').innerText = simdi.toLocaleTimeString('tr-TR');
+    }
+    setInterval(guncelle, 1000); // Her saniye günceller
+    guncelle();
+</script>
+    
     <h2>Coğrafya Asistanı</h2>
     <input type="text" id="komut" placeholder="Coğrafi terim yaz ve Enter'a bas..." onkeyup="sorgula(event)">
     <div id="ekran">Sorgu bekleniyor...</div>
