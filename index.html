@@ -3,62 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yusuf Portalı | Profesyonel</title>
+    <title>Yusuf AI Portalı</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0f172a; color: #f1f5f9; display: flex; justify-content: center; padding: 20px; margin: 0; }
-        .container { width: 100%; max-width: 450px; background: #1e293b; padding: 25px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); text-align: center; }
-        h1 { color: #8b5cf6; margin-bottom: 20px; }
-        button { width: 100%; padding: 14px; margin: 8px 0; background: #334155; border: none; border-radius: 12px; color: white; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        button:hover { background: #8b5cf6; }
-        <button onclick="window.location.href='üstasis.html'">Asistanı Başlat</button>
-        #app-box { margin-top: 20px; padding: 20px; background: #0f172a; border-radius: 15px; min-height: 150px; }
-        input { width: 100%; padding: 10px; margin-top: 10px; border-radius: 8px; border: none; box-sizing: border-box; }
+        body { background: #0f172a; color: white; font-family: 'Segoe UI', sans-serif; display: flex; flex-direction: column; align-items: center; padding: 20px; text-align: center; }
+        /* Tarih ve Saat Stili */
+        #zaman-paneli { display: flex; justify-content: space-between; width: 100%; max-width: 400px; color: #94a3b8; font-size: 14px; margin-bottom: 20px; }
+        h1 { color: #8b5cf6; margin-bottom: 30px; }
+        .menu { display: flex; flex-direction: column; gap: 15px; width: 100%; max-width: 400px; }
+        button { 
+            padding: 15px; width: 80%; margin: 10px auto; cursor: pointer; 
+            border-radius: 12px; border: 1px solid #334155; 
+            background: #1e293b; color: white; font-size: 16px; transition: 0.3s;
+        }
+        button:hover { background: #334155; border-color: #8b5cf6; }
+        .asistan-btn { background: #7c3aed; font-weight: bold; border: none; }
     </style>
 </head>
 <body>
-<div class="container">
-    <h1>Yusuf AI Portalı</h1>
-    <button onclick="oyunAc()">Sayı Tahmin Oyunu</button>
-    <button onclick="hesapMakinesiAc()">Hesap Makinesi</button>
-    <button onclick="hakkindaAc()">coğrafya</button>
-     <button onclick="window.location.href='üstasis.html'">Asistanı Başlat</button>
-    <div id="app-box">
-        <p>Bir modül seç ve kullanmaya başla!</p>
+    <div id="zaman-paneli">
+        <div id="tarih"></div>
+        <div id="saat"></div>
     </div>
-</div>
-<script>
-    let appBox = document.getElementById('app-box');
-    function oyunAc() {
-        window.gizli = Math.floor(Math.random() * 100) + 1;
-        appBox.innerHTML = "<h3>Sayı Tahmin (1-100)</h3>" +
-            "<input type='number' id='tahmin' placeholder='Tahminini gir...'>" +
-            "<button onclick='tahminEt()'>Kontrol Et</button>" +
-            "<p id='durum'></p>";
-    }
-    function tahminEt() {
-        let t = document.getElementById('tahmin').value;
-        let s = document.getElementById('durum');
-        if(t == window.gizli) s.innerHTML = "🎉 TEBRİKLER! Bildin!";
-        else if(t < window.gizli) s.innerHTML = "Daha BÜYÜK bir sayı gir.";
-        else s.innerHTML = "Daha KÜÇÜK bir sayı gir.";
-    }
-    function hesapMakinesiAc() {
-        appBox.innerHTML = "<h3>Hesap Makinesi</h3>" +
-            "<input type='text' id='islem' placeholder='Örn: 50*2+10'>" +
-            "<button onclick='hesapla()'>Hesapla</button>" +
-            "<p id='sonuc'></p>";
-    }
-    function hesapla() {
-        try {
-            let res = eval(document.getElementById('islem').value);
-            document.getElementById('sonuc').innerHTML = "Sonuç: " + res;
-        } catch {
-            document.getElementById('sonuc').innerHTML = "Hatalı işlem!";
+    <h1>Yusuf AI Portalı</h1>
+    <div class="menu">
+        <a href="üstasis.html" style="text-decoration: none;">
+            <button class="asistan-btn">Asistanı Başlat</button>
+        </a>  
+        <button onclick="alert('Sayı Tahmin Oyunu çok yakında!')">Sayı Tahmin Oyunu</button>
+        <button onclick="alert('Hesap Makinesi yapım aşamasında!')">Hesap Makinesi</button>
+        <button onclick="alert('Yusuf AI Portalı - 2026')">Hakkında</button>
+    </div>
+    <script>
+        function guncelle() {
+            let simdi = new Date();
+            document.getElementById('tarih').innerText = simdi.toLocaleDateString('tr-TR');
+            document.getElementById('saat').innerText = simdi.toLocaleTimeString('tr-TR');
         }
-    }
-    function hakkindaAc() {
-        appBox.innerHTML = "<h3>Hakkında</h3><p>Bu portal Yusuf tarafından tasarlandı. Tamamen çevrimdışı ve hızlıdır.</p>";
-    }
-</script>
+        setInterval(guncelle, 1000);
+        guncelle();
+    </script>
 </body>
 </html>
