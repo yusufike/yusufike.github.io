@@ -2,119 +2,51 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>Coğrafya Asistanı</title>
+    <title>Coğrafya ve Tarih Asistanı</title>
     <style>
-        body { background: #0f172a; color: #f1f5f9; font-family: sans-serif; display: flex; justify-content: center; padding: 20px; }
-        .container { width: 100%; max-width: 600px; background: #1e293b; padding: 20px; border-radius: 15px; }
-        input { width: 100%; padding: 15px; border-radius: 8px; border: none; box-sizing: border-box; font-size: 16px; }
-        #ekran { margin-top: 20px; padding: 20px; background: #0f172a; border-radius: 8px; min-height: 150px; line-height: 1.6; }
+        body { font-family: sans-serif; padding: 20px; background: #0f172a; color: white; }
+        .container { max-width: 500px; margin: auto; }
+        #zaman-paneli { display: flex; justify-content: space-between; color: #94a3b8; font-size: 14px; margin-bottom: 20px; }
+        input { width: 100%; padding: 15px; border-radius: 10px; border: none; margin-bottom: 20px; box-sizing: border-box; }
+        #ekran { background: #1e293b; padding: 20px; border-radius: 10px; min-height: 100px; }
     </style>
 </head>
-<body>,
-<div class="container"><!-- Tarih ve Saat için özel bölme -->
-<div style="display: flex; justify-content: space-between; font-size: 14px; color: #94a3b8; margin-bottom: 20px;">
-    <div id="tarih"></div>
-    <div id="saat"></div>
+<body>
+
+<div class="container">
+    <div id="zaman-paneli">
+        <div id="tarih"></div>
+        <div id="saat"></div>
+    </div>
+
+    <h2>Asistanına Sor</h2>
+    <input type="text" id="komut" placeholder="Soru sor ve Enter'a bas..." onkeypress="if(event.key==='Enter') sorgula()">
+    <div id="ekran">Cevap burada görünecek...</div>
 </div>
+
 <script>
+    // Tarih ve Saat
     function guncelle() {
         let simdi = new Date();
         document.getElementById('tarih').innerText = simdi.toLocaleDateString('tr-TR');
         document.getElementById('saat').innerText = simdi.toLocaleTimeString('tr-TR');
     }
-    setInterval(guncelle, 1000); // Her saniye günceller
+    setInterval(guncelle, 1000);
     guncelle();
-</script>
-    
-    <h2>Coğrafya Asistanı</h2>
-    <input type="text" id="komut" placeholder="Coğrafi terim yaz ve Enter'a bas..." onkeyup="sorgula(event)">
-    <div id="ekran">Sorgu bekleniyor...</div>
-</div>
-<script>
-// Burası coğrafya verilerin için özel bölme
-const veriler = [
-    { anahtar: ["anahtar1"], bilgi: "Bilgi 1" },
-    { anahtar: ["anahtar2"], bilgi: "Bilgi 2" },
-   //Yeni Üst Düzey Coğrafya Bilgileri
-    { anahtar: ["türkiye"], bilgi: "Türkiye: Asya ve Avrupa arasında stratejik köprü. Nedeni: Coğrafi konum. Çıkarı: Ticaret kontrolü. Olmazsa ne olur: Lojistik üstünlük kaybedilir." },
-    { anahtar: ["ekvator"], bilgi: "Ekvator: Dünyayı ikiye böler. Nedeni: Eksen eğikliği. Çıkarı: İklim çeşitliliği. Olmazsa ne olur: Mevsimler oluşmaz." },
-    { anahtar: ["okyanus", "okyanuslar"], bilgi: "Okyanuslar: Dev su kütleleri. Nedeni: Levha hareketleri. Çıkarı: İklim düzenleme. Olmazsa ne olur: İklim felaketleri yaşanır." },
-    { anahtar: ["amazon"], bilgi: "Amazon: Oksijen deposu. Nedeni: Nem. Çıkarı: Küresel soğutma. Olmazsa ne olur: Küresel ısınma hızlanır." },
-    { anahtar: ["kıtalar"], bilgi: "Kıtalar: Büyük kara parçaları. Nedeni: Tektonik. Çıkarı: Kültürel çeşitlilik. Olmazsa ne olur: Yaşam alanı daralır." },
-    //Önceki Kültür Bilgileri 
-    { anahtar: ["japonya"], bilgi: "Japonya: Disiplin ve teknoloji." },
-    { anahtar: ["çin"], bilgi: "Çin: Kadim gelenekler." },
-    { anahtar: ["fransa"], bilgi: "Fransa: Sanat ve edebiyat." },
-    { anahtar: ["almanya"], bilgi: "Almanya: Sanayi ve düzen." },
-    { anahtar: ["ingiltere"], bilgi: "İngiltere: Tarihi diplomasi." },
-    { anahtar: ["italya"], bilgi: "İtalya: Rönesans ve mimari." },
-    { anahtar: ["rusya"], bilgi: "Rusya: Geniş coğrafya kültürü." },
-    { anahtar: ["brezilya"], bilgi: "Brezilya: Renkli festival kültürü." },
-    { anahtar: ["mısır"], bilgi: "Mısır: Piramitler ve kadim tarih." }
-    // 17 Padişah
-    { anahtar: ["osman gazi"], bilgi: "Osman Gazi: Kurucu. Bafeus Savaşı'nı yönetti." },
-    { anahtar: ["orhan gazi"], bilgi: "Orhan Gazi: Bursa'yı fethetti. Pelekanon Savaşı." },
-    { anahtar: ["i. murad"], bilgi: "I. Murad: Edirne fatihi, I. Kosova'da şehit oldu." },
-    { anahtar: ["yıldırım bayezid"], bilgi: "Yıldırım Bayezid: Niğbolu galibi, Ankara Savaşı'nı yaşadı." },
-    { anahtar: ["i. mehmed"], bilgi: "I. Mehmed: Fetret devrini bitirdi." },
-    { anahtar: ["ii. murad"], bilgi: "II. Murad: Varna ve II. Kosova zaferleri." },
-    { anahtar: ["fatih", "mehmed"], bilgi: "Fatih: İstanbul'u fethetti (1453)." },
-    { anahtar: ["ii. bayezid"], bilgi: "II. Bayezid: Şair padişah." },
-    { anahtar: ["yavuz", "selim"], bilgi: "Yavuz Sultan Selim: Halifeliği Osmanlı'ya getirdi." },
-    { anahtar: ["kanuni", "süleyman"], bilgi: "Kanuni: Devletin en parlak dönemi." },
-    { anahtar: ["ii. selim"], bilgi: "II. Selim: Kıbrıs'ı fethetti." },
-    { anahtar: ["iii. murad"], bilgi: "III. Murad: Sınırları genişletti." },
-    { anahtar: ["iii. mehmed"], bilgi: "III. Mehmed: Eğri Fatihi." },
-    { anahtar: ["i. ahmed"], bilgi: "I. Ahmed: Sultanahmet Camii'ni yaptırdı." },
-    { anahtar: ["genç osman"], bilgi: "Genç Osman: Yenilikçi sultan." },
-    { anahtar: ["iv. murad"], bilgi: "IV. Murad: Bağdat Fatihi." },
-    { anahtar: ["iv. mehmed"], bilgi: "IV. Mehmed: Avcı lakabıyla tanınır." },
-    // 15 Savaş
-    { anahtar: ["malazgirt"], bilgi: "Malazgirt: Anadolu kapıları açıldı." },
-    { anahtar: ["miryokefalon"], bilgi: "Miryokefalon: Anadolu kesin Türk yurdu oldu." },
-    { anahtar: ["kosova"], bilgi: "Kosova: Balkan hakimiyeti." },
-    { anahtar: ["niğbolu"], bilgi: "Niğbolu: Haçlılara karşı zafer." },
-    { anahtar: ["istanbul fethi"], bilgi: "İstanbul: Orta Çağ bitti." },
-    { anahtar: ["çaldıran"], bilgi: "Çaldıran: Doğu güvenliği sağlandı." },
-    { anahtar: ["mohaç"], bilgi: "Mohaç: Orta Avrupa kapıları açıldı." },
-    { anahtar: ["varna"], bilgi: "Varna: Balkan zaferi." },
-    { anahtar: ["ridaniye"], bilgi: "Ridaniye: Memlükler yıkıldı." },
-    { anahtar: ["inebahtı"], bilgi: "İnebahtı: Denizde mağlubiyet." },
-    { anahtar: ["haçova"], bilgi: "Haçova: Meydan zaferi." },
-    { anahtar: ["hotin"], bilgi: "Hotin: Lehistan seferi." },
-    { anahtar: ["bağdat"], bilgi: "Bağdat: Geri alındı." },
-    { anahtar: ["girit"], bilgi: "Girit: Uzun kuşatma." },
-    { anahtar: ["viyana"], bilgi: "Viyana: Savunmaya geçiş." },
-    // 10 Kahraman
-    { anahtar: ["alparslan"], bilgi: "Alparslan: Malazgirt Fatihi." },
-    { anahtar: ["kılıç arslan"], bilgi: "Kılıç Arslan: Haçlılara karşı direniş." },
-    { anahtar: ["ertuğrul gazi"], bilgi: "Ertuğrul Gazi: Osmanlı'nın temeli." },
-    { anahtar: ["ulubatlı hasan"], bilgi: "Ulubatlı Hasan: Fetih bayrağını dikti." },
-    { anahtar: ["barbaros"], bilgi: "Barbaros: Preveze zaferi." },
-    { anahtar: ["mimar sinan"], bilgi: "Mimar Sinan: Süleymaniye mimarı." },
-    { anahtar: ["piri reis"], bilgi: "Piri Reis: Dünya haritası." },
-    { anahtar: ["seyit onbaşı"], bilgi: "Seyit Onbaşı: Çanakkale kahramanı." },
-    { anahtar: ["nene hatun"], bilgi: "Nene Hatun: Erzurum kahramanı." },
-    { anahtar: ["sütçü imam"], bilgi: "Sütçü İmam: Milli direniş." },
-    // 10 Kültür
-    { anahtar: ["japonya"], bilgi: "Japonya: Disiplin ve teknoloji." },
-    { anahtar: ["türkiye"], bilgi: "Türkiye: Misafirperverlik." },
-    { anahtar: ["çin"], bilgi: "Çin: Kadim gelenekler." },
-    { anahtar: ["fransa"], bilgi: "Fransa: Sanat ve edebiyat." },
-    { anahtar: ["almanya"], bilgi: "Almanya: Sanayi ve düzen." },
-    { anahtar: ["ingiltere"], bilgi: "İngiltere: Tarihi diplomasi." },
-    { anahtar: ["italya"], bilgi: "İtalya: Rönesans ve mimari." },
-    { anahtar: ["rusya"], bilgi: "Rusya: Geniş coğrafya kültürü." },
-    { anahtar: ["brezilya"], bilgi: "Brezilya: Renkli festival kültürü." },
-    { anahtar: ["mısır"], bilgi: "Mısır: Piramitler ve kadim tarih." }                     
+
+    // TÜM VERİLERİN BURADA
+    const veriler = [
+
     ];
-function sorgula(e) {
-    if (e.key !== 'Enter') return;
-    let girdi = document.getElementById('komut').value.toLowerCase();
-    let ekran = document.getElementById('ekran');
-    let bul = veriler.find(item => item.anahtar.some(a => girdi.includes(a)));
-    ekran.innerHTML = bul ? `<h3>Sonuç:</h3><p>${bul.bilgi}</p>` : "Bu bilgi sistemde henüz kayıtlı değil.";
-}
-</script>
-</body>
-</html>
+
+    function sorgula() {
+        let girdi = document.getElementById('komut').value.toLowerCase();
+        let ekran = document.getElementById('ekran');
+        let bul = veriler.find(item => item.anahtar.some(a => girdi.includes(a)));
+        
+        if (bul) {
+            ekran.innerHTML = `<h3>Sonuç:</h3><p>${bul.bilgi}</p>`;
+            let konusma = new SpeechSynthesisUtterance(bul.bilgi);
+            konusma.lang = 'tr-TR';
+            window.speechSynthesis.speak(konusma
+    
